@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109222400) do
+ActiveRecord::Schema.define(version: 20170109224959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "developers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "developerskills", force: :cascade do |t|
+    t.integer  "developer_id"
+    t.integer  "skill_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
+    t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
+  end
 
   create_table "managers", force: :cascade do |t|
     t.string   "name"
@@ -33,24 +49,6 @@ ActiveRecord::Schema.define(version: 20170109222400) do
     t.datetime "updated_at",  null: false
     t.integer  "manager_id"
     t.index ["manager_id"], name: "index_projects_on_manager_id", using: :btree
-  end
-
-  add_foreign_key "projects", "managers"
-
-  create_table "developers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "salary"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "developerskills", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "developer_id"
-    t.integer  "skill_id"
-    t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
-    t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
   end
 
   create_table "skills", force: :cascade do |t|
@@ -79,4 +77,5 @@ ActiveRecord::Schema.define(version: 20170109222400) do
     t.index ["task_id"], name: "index_taskskills_on_task_id", using: :btree
   end
 
+  add_foreign_key "projects", "managers"
 end
