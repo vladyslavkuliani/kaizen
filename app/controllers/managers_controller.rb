@@ -4,9 +4,9 @@ class ManagersController < ApplicationController
   end
 
   def create
-    managers = Manager.new(managers_params)
-    if managers.save
-      session[:manager_id] = managers.id
+    manager = Manager.new(manager_params)
+    if manager.save
+      session[:manager_id] = manager.id
       redirect_to '/'
     else
       redirect_to '/signup'
@@ -15,7 +15,7 @@ class ManagersController < ApplicationController
 
 private
 
-  def managers_params
+  def manager_params
     params.require(:manager).permit(:name, :last, :company, :email, :password, :password_confirmation)
   end
 end
