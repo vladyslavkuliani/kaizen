@@ -25,4 +25,15 @@ ActiveRecord::Schema.define(version: 20170109222400) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "deadline"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "manager_id"
+    t.index ["manager_id"], name: "index_projects_on_manager_id", using: :btree
+  end
+
+  add_foreign_key "projects", "managers"
 end
