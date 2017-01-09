@@ -36,4 +36,47 @@ ActiveRecord::Schema.define(version: 20170109222400) do
   end
 
   add_foreign_key "projects", "managers"
+
+  create_table "developers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "salary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "developerskills", force: :cascade do |t|
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "developer_id"
+    t.integer  "skill_id"
+    t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
+    t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string   "name"
+    t.string   "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "cost"
+    t.string   "status"
+    t.integer  "priority_level"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "taskskills", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "task_id"
+    t.integer  "skill_id"
+    t.index ["skill_id"], name: "index_taskskills_on_skill_id", using: :btree
+    t.index ["task_id"], name: "index_taskskills_on_task_id", using: :btree
+  end
+
 end
