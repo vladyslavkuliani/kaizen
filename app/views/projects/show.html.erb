@@ -1,2 +1,27 @@
 <h1>Projects#show</h1>
 <p>Find me in app/views/projects/show.html.erb</p>
+
+<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", @project, :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %>
+<p>
+  <strong>Project Title:</strong> <%= @project.title %><br>
+  <strong>Project Deadline:</strong> <%= @project.deadline %><br>
+  <strong>Project Description:</strong> <%= @project.description %><br>
+  <strong>Project Tasks:</strong> <p class="task">Add Task</p>
+  <div class="new-task">
+    <%= form_for :task, url: '/tasks' do |f| %>
+      <%= f.hidden_field :project_id, :value => @project.id %>
+      Title: <%= f.text_field :title %><br>
+      <span class="description">Description:</span> <%= f.text_area :description %><br>
+      Skills:<br>
+      <%= f.submit(class: 'btn btn-success') %>
+    <% end %>
+  </div>
+  <% @project.tasks.order(:created_at).reverse_order.each do |task| %>
+    <p><%= task.title %><br>
+    <%= task.description %><br></p>
+    <strong>Required Skills:</strong>
+    <% task.skills.each do |skill| %>
+      <%= skill.name %>
+    <% end %>
+  <% end %>
+</p>
