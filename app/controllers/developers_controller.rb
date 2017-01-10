@@ -9,7 +9,7 @@ class DevelopersController < ApplicationController
   end
 
   def create
-    if !params[:skills]
+    if params[:skills] == nil
       redirect_to "/staff/new"
     else
       new_developer = Developer.create(dev_params)
