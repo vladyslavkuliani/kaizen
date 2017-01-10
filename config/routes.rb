@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   get '/staff' => 'developers#index'
   get '/staff/new' => 'developers#new', as: 'new_dev'
-  post '/staff' => 'developers#create'
+  post '/staff/new' => 'developers#create'
   get '/staff/:name' => 'developers#show', as: 'dev'
   get '/staff/:name/edit' => 'developers#edit', as: 'edit_dev'
   put '/staff/:name' => 'developers#update'
