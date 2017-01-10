@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   get '/skills' => 'skills#index', as: 'skills'
   get '/skills/new' => 'skills#new', as: 'new_skill'
   post '/skills' => 'skills#create'
-  get '/skills/:skill' => 'skills#show', as: 'skill'
+  get '/skills/:name' => 'skills#show', as: 'skill'
   get '/skills/:skill/edit' => 'skills#edit', as: 'edit_skill'
   put '/skills/:skill' => 'skills#update'
   patch '/skills/:skill' => 'skills#update'
