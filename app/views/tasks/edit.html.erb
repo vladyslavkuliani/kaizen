@@ -1,0 +1,10 @@
+<%= form_for :task, url: task_path(@task.title), :method => :put do |f| %>
+  <%= f.hidden_field :project_id, :value => @project.id %>
+  Title: <%= f.text_field :title %><br>
+  <span class="description">Description:</span> <%= f.text_area :description %><br>
+  Skills:<br>
+    <%Skill.all.each_with_index do |skill|%>
+      <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
+    <%end%>
+  <%= f.submit(class: 'btn btn-success') %>
+<% end %>
