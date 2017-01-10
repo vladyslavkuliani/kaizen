@@ -13,6 +13,10 @@ class ManagersController < ApplicationController
     end
   end
 
+  def profile
+    @manager = current_manager
+  end
+
 private
 
   def manager_params

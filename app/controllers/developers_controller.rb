@@ -5,7 +5,7 @@ class DevelopersController < ApplicationController
 
   def new
     @developer = Developer.new()
-    @skills = Skill.all
+    @skills = Skill.all.order(:name)
   end
 
   def create
