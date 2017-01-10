@@ -5,9 +5,11 @@
   Email: <%=f.email_field :email%><br>
   Salary: <%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><span>$</span>
   <h3>Skill Set: </h3>
-  <%@skills.each_with_index do |skill,indx|%>
-    <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
-    Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
-  <%end%>
-  <%=f.submit "Add developer"%>
+  <div class="skills-scroll" data-spy="scroll">
+    <%@skills.each_with_index do |skill,indx|%>
+      <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
+      Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
+    <%end%>
+  </div>
+  <%=f.submit("Add developer", class: 'btn btn-success')%>
 <%end%>

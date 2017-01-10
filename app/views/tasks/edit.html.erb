@@ -4,8 +4,14 @@
   <span class="description">Description:</span> <%= f.text_area :description %><br>
   Skills:<br>
   <div class="skills-scroll" data-spy="scroll">
-    <%Skill.all.each_with_index do |skill|%>
+    <%Skill.all.each do |skill|%>
       <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
+    <%end%>
+  </div>
+  Developers:<br>
+  <div class="skills-scroll" data-spy="scroll">
+    <%Developer.all.each do |dev|%>
+      <%=dev.name%>: <%= check_box_tag "developers[]", dev.id%><br>
     <%end%>
   </div>
   <%= f.submit(class: 'btn btn-success') %>

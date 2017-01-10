@@ -8,7 +8,7 @@ Developers#index
     Skills:<br>
     <% dev.skills.each do |skill| %>
       Name: <%= skill.name %><br>
-      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %>
+      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %><br>
     <% end %>
   </p>
 <% end %>

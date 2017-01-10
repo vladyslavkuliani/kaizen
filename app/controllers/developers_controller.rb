@@ -23,13 +23,13 @@ class DevelopersController < ApplicationController
         developer_skill = Developerskill.where({developer_id: new_developer.id, skill_id: id})
         developer_skill.update_all(level: params[:level][index])
 
-        redirect_to devs_path
       end
+      redirect_to devs_path
     end
   end
 
   def show
-    @developer = Developer.find(params[:name])
+    @developer = Developer.find_by_name(params[:name])
   end
 
   def destroy
