@@ -24,7 +24,7 @@ class DevelopersController < ApplicationController
         developer_skill.update_all(level: params[:level][index])
 
       end
-      redirect_to devs_path
+      redirect_to profile_path
     end
   end
 
