@@ -1,0 +1,6 @@
+<h1>This is index.html from skills controller</h1>
+
+<% @skills.each do |skill| %>
+  <p>Skill: <%= link_to skill.name, skill_path(skill.name) %></p> 
+  <p>Description: <%= skill.description%></p>
+<% end %>

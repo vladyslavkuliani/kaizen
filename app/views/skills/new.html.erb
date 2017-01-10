@@ -1,0 +1,8 @@
+<h1>This is new.html from skills controller</h1>
+<%= form_for @skill do |f| %>
+  <span>Name: </span>
+  <%= f.text_field :name %><br>
+  <span>Description: </span>
+  <%= f.text_field :description %><br>
+  <%= f.submit %>
+<% end %>

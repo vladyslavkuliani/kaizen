@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20170109231627) do
   end
 
   create_table "developerskills", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
     t.integer  "developer_id"
     t.integer  "skill_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
     t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
   end
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(version: 20170109231627) do
   create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.string   "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "tasks", force: :cascade do |t|
