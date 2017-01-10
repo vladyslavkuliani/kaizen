@@ -7,6 +7,14 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'ffaker'
 
+Skill.destroy_all
+skills = []
 50.times do
-  Skill.create(name:FFaker::Skill.tech_skills)
+  skills << FFaker::Skill.tech_skill
+end
+
+skills.uniq!
+
+skills.each do |skill|
+  Skill.create({name:skill})
 end
