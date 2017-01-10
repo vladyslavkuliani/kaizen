@@ -9,7 +9,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    if Project.create(project_params)
+    new_project = Project.new(project_params)
+    if new_project.save
       redirect_to projects_path
     else
       flash[:error] = new_project.errors.full_messages.join("\n")

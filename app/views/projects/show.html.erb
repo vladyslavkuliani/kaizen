@@ -6,10 +6,19 @@
   <strong>Project Title:</strong> <%= @project.title %><br>
   <strong>Project Deadline:</strong> <%= @project.deadline %><br>
   <strong>Project Description:</strong> <%= @project.description %><br>
-  <strong>Project Tasks:</strong>
+  <strong>Project Tasks:</strong> <p class="task">Add Task</p>
+  <div class="new_task">
+    <%= form_for :task, url: '/tasks' do |f| %>
+      <%= f.hidden_field :project_id, :value => @project.id %>
+      Title: <%= f.text_field :title %><br>
+      <span class="description">Description:</span> <%= f.text_area :description %><br>
+      <%= f.submit(class: 'btn btn-success') %>
+    <% end %>
+  </div>
   <% @project.tasks.each do |task| %>
-    <%= task.title %><br>
-    <strong>Required Skills:</strong> 
+    <p><%= task.title %><br>
+    <%= task.description %><br></p>
+    <strong>Required Skills:</strong>
     <% task.skills.each do |skill| %>
       <%= skill.name %>
     <% end %>
