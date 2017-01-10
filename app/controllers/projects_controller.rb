@@ -5,15 +5,22 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @projects = Project.new
+    @project = Project.new
   end
 
   def edit
-    @projects = Project.find_by_title(project)
+    @project = Project.find_by_title(project)
+    render :new
   end
 
   def show
-    @projects = Project.find_by_title(project)
+    @project = Project.find_by_title(project)
+  end
+
+  def destroy
+    deleted_project = Project.find_by_title(project)
+    Project.destroy(deleted_project)
+    redirect_to projects_path
   end
 
   private

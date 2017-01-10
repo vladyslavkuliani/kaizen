@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   patch '/profile' => 'managers#update'
   delete '/profile' => 'managers#destroy'
 
-  get '/projects' => 'projects#index'
+  get '/projects' => 'projects#index', as: 'projects'
   get '/projects/new' => 'projects#new', as: 'new_project'
   post '/projects' => 'projects#create'
   get '/projects/:title' => 'projects#show', as: 'project'
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   patch '/tasks/:title' => 'tasks#update'
   delete '/tasks/:title' => 'tasks#destroy'
 
-  get '/staff' => 'developers#index'
+  get '/staff' => 'developers#index', as: 'devs'
   get '/staff/new' => 'developers#new', as: 'new_dev'
   post '/staff' => 'developers#create'
   get '/staff/:name' => 'developers#show', as: 'dev'
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   patch '/staff/:name' => 'developers#update'
   delete '/staff/:name' => 'developers#destroy'
 
-  get '/skills' => 'skills#index'
+  get '/skills' => 'skills#index', as: 'skills'
   get '/skills/new' => 'skills#new', as: 'new_skill'
   post '/skills' => 'skills#create'
   get '/skills/:skill' => 'skills#show', as: 'skill'
