@@ -13,9 +13,10 @@ class SessionsController < ApplicationController
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to '/'
+      redirect_to '/profile'
     else
     # If user's login doesn't work, send them back to the login form.
+      flash[:error] = "Wrong email or password!"
       redirect_to '/login'
     end
   end
