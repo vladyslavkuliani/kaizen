@@ -7,7 +7,7 @@
   <strong>Project Deadline:</strong> <%= @project.deadline %><br>
   <strong>Project Description:</strong> <%= @project.description %><br>
   <strong>Project Tasks:</strong> <p class="task">Add Task</p>
-  <div class="new_task">
+  <div class="new-task">
     <%= form_for :task, url: '/tasks' do |f| %>
       <%= f.hidden_field :project_id, :value => @project.id %>
       Title: <%= f.text_field :title %><br>
