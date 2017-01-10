@@ -11,6 +11,7 @@
     <%= form_for :task, url: '/tasks' do |f| %>
       <%= f.hidden_field :project_id, :value => @project.id %>
       Title: <%= f.text_field :title %><br>
+      Deadline: <%= f.date_field :deadline %><br>
       <span class="description">Description:</span> <%= f.text_area :description %><br>
       Skills:<br>
       <div class="skills-scroll" data-spy='scroll'>
@@ -29,6 +30,7 @@
   </div>
   <% @project.tasks.order(:updated_at).reverse_order.each do |task| %>
     <p><%= task.title %><br>
+    <%= task.deadline %><br>
     <%= task.description %><br></p>
     <strong>Required Skills:</strong><br>
     <% task.skills.each do |skill| %>
