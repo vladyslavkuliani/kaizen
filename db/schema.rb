@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109224959) do
+ActiveRecord::Schema.define(version: 20170109231627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "developers", force: :cascade do |t|
     t.string   "name"
-    t.string   "email"
-    t.float    "salary"
+    t.string   "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -26,7 +25,6 @@ ActiveRecord::Schema.define(version: 20170109224959) do
   create_table "developerskills", force: :cascade do |t|
     t.integer  "developer_id"
     t.integer  "skill_id"
-    t.integer  "level"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
@@ -46,7 +44,7 @@ ActiveRecord::Schema.define(version: 20170109224959) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.date     "deadline"
+    t.datetime "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "manager_id"
@@ -55,9 +53,9 @@ ActiveRecord::Schema.define(version: 20170109224959) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "level"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
