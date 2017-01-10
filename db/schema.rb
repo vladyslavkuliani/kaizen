@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20170109231627) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "deadline"
+    t.date     "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "manager_id"

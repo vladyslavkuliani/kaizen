@@ -8,6 +8,17 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def create
+    new_project = Project.new(project_params)
+    p session[:manager_id]
+    if new_project.save
+      redirect_to projects_path
+    else
+      flash[:error] = new_project.errors.full_messages.join("\n")
+      redirect_to new_project_path
+    end
+  end
+
   def edit
     @project = Project.find_by_title(project)
     render :new
@@ -30,7 +41,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :deadline)
+    params.require(:project).permit(:title, :description, :deadline, :manager_id)
   end
 
 end

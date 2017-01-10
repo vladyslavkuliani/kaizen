@@ -1,11 +1,13 @@
 <h1>Projects#show</h1>
 <p>Find me in app/views/projects/show.html.erb</p>
 
-<%= @project.title %><br>
-<%= @project.deadline %><br>
-<%= @project.description %><br>
+Project Title: <%= @project.title %><br>
+Project Deadline: <%= @project.deadline %><br>
+Project Description: <%= @project.description %><br>
+Project Tasks:
 <% @project.tasks.each do |task| %>
-  <%= task.title %>
+  <%= task.title %><br>
+  Required Skills: 
   <% task.skills.each do |skill| %>
     <%= skill.name %>
   <% end %>
