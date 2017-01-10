@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.where({manager_id: session[:manager_id]})
+    @projects = Project.where({manager_id: session[:manager_id]}).order(:updated_at).reverse_order
   end
 
   def new

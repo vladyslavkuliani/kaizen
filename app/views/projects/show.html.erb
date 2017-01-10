@@ -1,15 +1,17 @@
 <h1>Projects#show</h1>
 <p>Find me in app/views/projects/show.html.erb</p>
 
-Project Title: <%= @project.title %><br>
-Project Deadline: <%= @project.deadline %><br>
-Project Description: <%= @project.description %><br>
-Project Tasks:
-<% @project.tasks.each do |task| %>
-  <%= task.title %><br>
-  Required Skills: 
-  <% task.skills.each do |skill| %>
-    <%= skill.name %>
+<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", @project, :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %>
+<p>
+  <strong>Project Title:</strong> <%= @project.title %><br>
+  <strong>Project Deadline:</strong> <%= @project.deadline %><br>
+  <strong>Project Description:</strong> <%= @project.description %><br>
+  <strong>Project Tasks:</strong>
+  <% @project.tasks.each do |task| %>
+    <%= task.title %><br>
+    <strong>Required Skills:</strong> 
+    <% task.skills.each do |skill| %>
+      <%= skill.name %>
+    <% end %>
   <% end %>
-<% end %>
-
+</p>
