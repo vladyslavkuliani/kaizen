@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
 
   def create
-    p skills.class
     new_task = Task.new(task_params)
+    params[:skills].each do |skill|
+      new_task.skills << Skill.find(skill)
+    end
     if new_task.save
       redirect_to projects_path
     else
@@ -30,10 +32,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :description, :cost, :status, :priority_level, :project_id)
-  end
-
-  def skills
-    params.require(:task).permit(:skills)
   end
 
 end
