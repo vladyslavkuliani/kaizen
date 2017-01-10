@@ -1,0 +1,14 @@
+Developers#index
+
+<% @developers.each do |dev| %>
+  <p>
+    Name: <%= dev.name %><br>
+    Email: <%= dev.email %><br>
+    Salary: <%= dev.salary %><br>
+    Skills:<br>
+    <% dev.skills.each do |skill| %>
+      Name: <%= skill.name %><br>
+      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %>
+    <% end %>
+  </p>
+<% end %>
