@@ -12,10 +12,11 @@
       <%= f.hidden_field :project_id, :value => @project.id %>
       Title: <%= f.text_field :title %><br>
       <span class="description">Description:</span> <%= f.text_area :description %><br>
+      Skills:<br>
       <%= f.submit(class: 'btn btn-success') %>
     <% end %>
   </div>
-  <% @project.tasks.each do |task| %>
+  <% @project.tasks.order(:created_at).reverse_order.each do |task| %>
     <p><%= task.title %><br>
     <%= task.description %><br></p>
     <strong>Required Skills:</strong>

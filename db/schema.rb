@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(version: 20170109231627) do
 
   create_table "developers", force: :cascade do |t|
     t.string   "name"
-    t.string   "salary"
+    t.string   "email"
+    t.float    "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170109231627) do
   create_table "developerskills", force: :cascade do |t|
     t.integer  "developer_id"
     t.integer  "skill_id"
+    t.integer  "level"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
@@ -53,7 +55,6 @@ ActiveRecord::Schema.define(version: 20170109231627) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.string   "level"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
