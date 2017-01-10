@@ -10,7 +10,6 @@ class ProjectsController < ApplicationController
 
   def create
     new_project = Project.new(project_params)
-    p session[:manager_id]
     if new_project.save
       redirect_to projects_path
     else
@@ -21,7 +20,16 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find_by_title(project)
-    render :new
+  end
+
+  def update
+    updated_project = Project.find_by_title(project)
+    if updated_project.update(project_params)
+      redirect_to project_path(project)
+    else
+      flash[:error] = updated_project.errors.full_messages.join("\n")
+      redirect_to edit_project_path(project)
+    end
   end
 
   def show

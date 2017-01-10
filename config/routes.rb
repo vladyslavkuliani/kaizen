@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/projects' => 'projects#index', as: 'projects'
   get '/projects/new' => 'projects#new', as: 'new_project'
-  post '/projects/new' => 'projects#create'
+  post '/projects' => 'projects#create'
   get '/projects/:title' => 'projects#show', as: 'project'
   get '/projects/:title/edit' => 'projects#edit', as: 'edit_project'
   put '/projects/:title' => 'projects#update'

@@ -3,6 +3,6 @@
 
 <% @projects.each do |project| %>
   <%= link_to project.title, project_path(project.title) %><br>
-  <%= project.description %><br>
   <%= project.deadline %><br>
+  <%= project.description %><br>
 <% end %>
