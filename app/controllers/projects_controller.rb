@@ -37,8 +37,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    deleted_project = Project.find_by_title(project)
-    Project.destroy(deleted_project)
+    Project.destroy(project)
     redirect_to projects_path
   end
 
