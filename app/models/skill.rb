@@ -6,4 +6,6 @@ class Skill < ApplicationRecord
   has_many :taskskills, dependent: :destroy
   has_many :tasks, through: :taskskills
 
+  validates :name, presence: true
+
 end

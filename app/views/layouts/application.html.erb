@@ -25,7 +25,7 @@
     <div class="jumbotron clearfix">
       <div class="container">
       <% flash.each do |name, msg| %>
-        <div class="error-message">! <%= msg %> !</div>
+        <div class="error-message alert alert-danger">! <%= msg %> !</div>
       <% end %>
 
       <%= yield %>
