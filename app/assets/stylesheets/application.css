@@ -18,3 +18,10 @@
 .description {
   vertical-align: top;
 }
+
+.skills-scroll {
+  position: relative;
+  height: 200px;
+  overflow: auto;
+  width: 200px;
+}

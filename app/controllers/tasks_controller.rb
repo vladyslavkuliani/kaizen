@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find_by_title(task)
+    @task = Task.find(task)
     @project = Project.find(@task.project_id)
   end
 

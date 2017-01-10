@@ -3,8 +3,10 @@
   Title: <%= f.text_field :title %><br>
   <span class="description">Description:</span> <%= f.text_area :description %><br>
   Skills:<br>
+  <div class="skills-scroll" data-spy="scroll">
     <%Skill.all.each_with_index do |skill|%>
       <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
     <%end%>
+  </div>
   <%= f.submit(class: 'btn btn-success') %>
 <% end %>
