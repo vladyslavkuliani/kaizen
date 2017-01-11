@@ -4,7 +4,7 @@ class Task < ApplicationRecord
 
   has_many :taskskills, dependent: :destroy
   has_many :skills, through: :taskskills
-  belongs_to :developer
+  belongs_to :developer, optional: true
 
 
   has_many :developertasks, dependent: :destroy

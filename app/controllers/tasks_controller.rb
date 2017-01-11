@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     end
     if params[:developers] != nil
       params[:developers].each do |dev|
-        new_task.developers << Developer.find(dev)
+        new_task.developer = Developer.find(dev)
       end
     end
     if new_task.save
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
     end
     if params[:developers] != nil
       params[:developers].each do |dev|
-        updated_task.developers << Developer.find(dev)
+        updated_task.developer = Developer.find(dev)
       end
     end
     if updated_task.update(task_params)
