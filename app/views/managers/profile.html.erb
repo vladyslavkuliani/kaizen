@@ -1,9 +1,4 @@
-<h1><%= @manager.name %></h1>
-
-<%= link_to('Add Project', new_project_path, class: 'btn btn-primary') %>
-<%= link_to('Add Developer', new_dev_path, class: 'btn btn-info') %>
-
-<br>
+<%= render partial: '/partials/userinfo' %>
 
 Projects:<br>
 <% @projects.each do |project| %>
@@ -13,3 +8,9 @@ Projects:<br>
     <%= project.description %><br>
   </p>
 <% end %>
+
+  <%=button_to "Add New Skill", new_skill_path, method: :get, class: "btn btn-info"%>
+  <br>
+  <%=button_to "Add New Developer", new_dev_path, method: :get, class: "btn btn-info"%>
+  <br>
+  <%=button_to "Add New Project", new_project_path, method: :get, class: "btn btn-info"%>
