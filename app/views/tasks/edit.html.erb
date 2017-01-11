@@ -11,9 +11,13 @@
   </div>
   Developers:<br>
   <div class="skills-scroll" data-spy="scroll">
-    <%Developer.all.each do |dev|%>
-      <%=dev.name%>: <%= check_box_tag "developers[]", dev.id%><br>
-    <%end%>
+    <% Developer.all.each do |dev| %>
+      <%= check_box_tag "developers[]", dev.id %> <%= dev.name %>: 
+      <% Developerskill.where({developer_id: dev}).each do |devskill| %>
+        <%= Skill.find(devskill.skill_id).name %> (<%= devskill.level %>), 
+      <% end %>
+      <br>
+    <% end %>
   </div>
   <%= f.submit(class: 'btn btn-success') %>
 <% end %>

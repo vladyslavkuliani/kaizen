@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
+  get '/workflow/:title' => 'sessions#show', as: 'workflow'
 
   get '/signup' => 'managers#new'
   post '/managers' => 'managers#create'

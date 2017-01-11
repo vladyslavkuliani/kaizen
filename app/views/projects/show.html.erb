@@ -1,7 +1,7 @@
 <h1>Projects#show</h1>
 <p>Find me in app/views/projects/show.html.erb</p>
 
-<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", @project, :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %>
+<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", @project, :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %> <%= link_to("Generate Workflow", workflow_path(@project.title), class: 'btn btn-success') %>
 <p>
   <strong>Project Title:</strong> <%= @project.title %><br>
   <strong>Project Deadline:</strong> <%= @project.deadline %><br>
@@ -22,7 +22,11 @@
       Developers:<br>
       <div class="skills-scroll" data-spy="scroll">
         <% Developer.all.each do |dev| %>
-          <%= dev.name %>: <%= check_box_tag "developers[]", dev.id %><br>
+          <%= check_box_tag "developers[]", dev.id %> <%= dev.name %>: 
+          <% Developerskill.where({developer_id: dev}).each do |devskill| %>
+            <%= Skill.find(devskill.skill_id).name %> (<%= devskill.level %>), 
+          <% end %>
+          <br>
         <% end %>
       </div>
       <%= f.submit(class: 'btn btn-success') %>

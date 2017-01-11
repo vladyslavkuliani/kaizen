@@ -1,0 +1,15 @@
+<%= @project.title %><br>
+<%= @project.deadline %><br>
+<br>
+<strong>Tasks:</strong><br>
+<% @tasks.each do |task| %>
+  <%= task.title %><br>
+  <%= task.deadline %><br>
+  Required Skills:<br>
+  <% task.skills.each do |skill| %>
+    <% task.developers.each do |dev| %>
+      Name, Skill, Level<br>
+    <% end %>
+  <% end %>
+  <br>
+<% end %>
