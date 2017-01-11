@@ -364,6 +364,26 @@ section {
 	}
 }
 
+.jumbotron .container {
+    max-width: 100%;
+    padding: 0px;
+}
+
+@media (min-width: 1200px)
+.container {
+    width: 99%;
+}
+
+@media (min-width: 992px)
+.container {
+    width: 99%;
+}
+
+@media (min-width: 768px)
+.container {
+    width: 99%;
+}
+
 .footer-basic {
 	padding: 40px 0;
 	background-color: #fff;
@@ -468,8 +488,4 @@ section {
 
 .navbar-brand .glyphicon {
 	margin-right: 6px;
-}
-
-.testimonials blockquote {
-	text-align: center;
 }
