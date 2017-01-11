@@ -8,7 +8,11 @@
   Required Skills:<br>
   <% task.skills.each do |skill| %>
     <% task.developers.each do |dev| %>
-      Name, Skill, Level<br>
+      <% if Developerskill.where({developer_id: dev.id, skill_id: skill.id}) != nil %>
+        <% Developerskill.where({developer_id: dev.id, skill_id: skill.id}).each do |devskill| %>
+        <%= dev.name %>, <%= skill.name %>, <%= devskill.level %><br>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
   <br>
