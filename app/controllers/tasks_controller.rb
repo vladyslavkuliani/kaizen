@@ -2,8 +2,15 @@ class TasksController < ApplicationController
 
   def create
     new_task = Task.new(task_params)
-    params[:skills].each do |skill|
-      new_task.skills << Skill.find(skill)
+    if params[:skills] != nil
+      params[:skills].each do |skill|
+        new_task.skills << Skill.find(skill)
+      end
+    end
+    if params[:developers] != nil
+      params[:developers].each do |dev|
+        new_task.developers << Developer.find(dev)
+      end
     end
     if new_task.save
       redirect_to projects_path
@@ -22,8 +29,15 @@ class TasksController < ApplicationController
 
   def update
     updated_task = Task.find_by_title(task)
-    params[:skills].each do |skill|
-      updated_task.skills << Skill.find(skill)
+    if params[:skills] != nil
+      params[:skills].each do |skill|
+        updated_task.skills << Skill.find(skill)
+      end
+    end
+    if params[:developers] != nil
+      params[:developers].each do |dev|
+        updated_task.developers << Developer.find(dev)
+      end
     end
     if updated_task.update(task_params)
       redirect_to project_path(Project.find(updated_task.project_id).title)
@@ -35,7 +49,7 @@ class TasksController < ApplicationController
 
   def destroy
     Task.destroy(task)
-    redirect_to projects_path
+    redirect_to profile_path
   end
 
   private
@@ -45,7 +59,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :cost, :status, :priority_level, :project_id)
+    params.require(:task).permit(:title, :deadline, :description, :cost, :status, :priority_level, :project_id)
   end
 
 end

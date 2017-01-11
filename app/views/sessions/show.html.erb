@@ -1,0 +1,19 @@
+<%= @project.title %><br>
+<%= @project.deadline %><br>
+<br>
+<strong>Tasks:</strong><br>
+<% @tasks.each do |task| %>
+  <%= task.title %><br>
+  <%= task.deadline %><br>
+  Required Skills:<br>
+  <% task.skills.each do |skill| %>
+    <% task.developers.each do |dev| %>
+      <% if Developerskill.where({developer_id: dev.id, skill_id: skill.id}) != nil %>
+        <% Developerskill.where({developer_id: dev.id, skill_id: skill.id}).each do |devskill| %>
+        <%= dev.name %>, <%= skill.name %>, <%= devskill.level %><br>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <br>
+<% end %>

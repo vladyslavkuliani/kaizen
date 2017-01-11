@@ -5,4 +5,6 @@ class Manager < ApplicationRecord
   has_many :projects
   has_many :developers
 
+  validates :email, length: { maximum: 255 }, presence: true, format: { with: /\w+@\w+\.\w+/}, uniqueness: true
+
 end

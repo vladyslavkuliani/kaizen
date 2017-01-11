@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+
+  $('.new-task').hide();
+
+  $('.task').on('click', function() {
+    $('.new-task').slideDown();
+  });
+
+  $('.task').on('dblclick', function() {
+    $('.new-task').slideUp();
+  });
+
+});

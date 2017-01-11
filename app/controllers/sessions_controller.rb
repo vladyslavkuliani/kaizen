@@ -20,6 +20,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def show
+    @project = Project.find_by_title(params[:title])
+    @tasks = Task.where({project_id: @project.id})
+  end
+
   def destroy
     session[:manager_id] = nil
     redirect_to '/login'

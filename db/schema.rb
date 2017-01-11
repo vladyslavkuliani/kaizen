@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170109231627) do
 
   # These are extensions that must be enabled in order to support this database
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170109231627) do
     t.datetime "updated_at",     null: false
     t.integer  "project_id"
     t.index ["developer_id"], name: "index_tasks_on_developer_id", using: :btree
+    t.date     "deadline"
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 
