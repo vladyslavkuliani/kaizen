@@ -18,3 +18,17 @@
 .description {
   vertical-align: top;
 }
+
+.full-height{
+  height: 100vh;
+  /*position: fixed;*/
+  left: 0;
+  background: rgb(46,60,84);
+  color: #A2B4BC;
+}
+
+
+
+ .link:hover{
+   background: #02ceff;
+ }
