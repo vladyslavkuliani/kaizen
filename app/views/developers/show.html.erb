@@ -1,0 +1,13 @@
+Developers#show
+
+<p>
+  Name: <%= @developer.name %><br>
+  Email: <%= @developer.email %><br>
+  Salary: <%= @developer.salary %><br>
+  <span class="skills">Skills:</span><br>
+  <span class="skills-list"><% @developer.skills.each do |skill| %>
+    Name: <%= skill.name %><br>
+    Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %><br>
+  <% end %>
+  </span>
+</p>

@@ -12,6 +12,7 @@ class SkillsController < ApplicationController
    Skill.create(
     skill_params
    )
+   p skill_params
    redirect_to('/skills')
   end
 
@@ -19,10 +20,24 @@ class SkillsController < ApplicationController
     @skill = Skill.find_by_name(skill)
   end
 
+  def edit
+    @skill = Skill.find_by_name(skill)
+  end
+
+  def update
+    updated_skill = Skill.find_by_name(skill)
+    p skill_params
+    if updated_skill.update(skill_params)
+      redirect_to skill_path(updated_skill.name)
+    else
+      redirect_to edit_skill_path(updated_skill.name)
+    end
+  end
+
   private
 
   def skill
-    params[:name]
+    params[:skill]
   end
 
   def skill_params

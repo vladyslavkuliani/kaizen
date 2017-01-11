@@ -32,6 +32,18 @@ class DevelopersController < ApplicationController
     @developer = Developer.find_by_name(params[:name])
   end
 
+  def edit
+    @developer = Developer.find_by_name(params[:name])
+    @skills = []
+    Developerskill.where({developer_id: @developer}).each do |devskill|
+      @skills << Skill.find(devskill.skill_id)
+    end
+  end
+
+  def update
+
+  end
+
   def destroy
     Developer.find(name: params[:name]).destroy
   end
