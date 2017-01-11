@@ -47,29 +47,13 @@ class SessionsController < ApplicationController
       end
     end
 
-    zero_count_same = true
-    sum_skills_level_per_task.each_with_index do |obj, index|
-      if index!=0 && (obj[:zero_count] != sum_skills_level_per_task[index-1][:zero_count])
-        zero_count_same = false
-        break
-      end
-    end
-
-    if zero_count_same
-      sum_skills_level_per_task.sort_by!{|obj| obj[:value]}
-    else
-      sum_skills_level_per_task.sort_by!{|obj| obj[:zero_count]}
-    end
+    sum_skills_level_per_task.sort_by!{|obj| obj[:zero_count]}
 
     while sum_skills_level_per_task.count > @project.tasks.count
-      if zero_count_same
-        sum_skills_level_per_task.shift
-      else
-        sum_skills_level_per_task.pop
-      end
+      sum_skills_level_per_task.pop
     end
 
-    sum_skills_level_per_task.reverse! if !zero_count_same
+    sum_skills_level_per_task.sort_by!{|obj| obj[:value]}
 
     sum_skills_level_per_task.each do |obj|
       max = 0
