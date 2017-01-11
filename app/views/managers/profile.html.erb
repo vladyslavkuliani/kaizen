@@ -1,1 +1,18 @@
-<h1><%= @manager.name %></h1>
+<%= render partial: '/partials/userinfo' %>
+
+
+  <%=button_to "Add New Skill", new_skill_path, method: :get, class: "btn btn-info"%>
+  <br>
+  <%=button_to "Add New Developer", new_dev_path, method: :get, class: "btn btn-info"%>
+  <br>
+  <%=button_to "Add New Project", new_project_path, method: :get, class: "btn btn-info"%>
+
+
+<div class="row">
+  <% @manager.projects.each do |project| %>
+    <div>
+      <h3>All my projects</h3>
+      <h4 class="m-t-none"><%= link_to project.title, project_path(title: project.title) %></h4>
+    </div>
+  <% end %>
+</div>
