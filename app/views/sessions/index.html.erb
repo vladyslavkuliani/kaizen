@@ -1,5 +1,121 @@
-<h1>Sessions#index</h1>
+<!DOCTYPE html>
+<html>
 
-<% if current_manager %>
+<head>
+    <%= csrf_meta_tags %>
+
+    <title>Kaizen</title>
+
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/lumen/bootstrap.min.css', media: 'all' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic', media: 'all' %>
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', media: 'all' %>
+    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css', media: 'all' %>
+
+    <%= stylesheet_link_tag 'app', media: 'all' %>
+
+    <link rel="shortcut icon" href="assets/img/project2_kaizenLogo_treeOnly.png" type="image/x-icon">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-default navbar-fixed-top navigation-clean-button">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand navbar-link" href="#">
+                        <img class="img-responsive" src="assets/img/project2_kaizenLogo_treeKaizen.png">
+                    </a>
+                    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                </div>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav"></ul>
+                    <p class="navbar-text navbar-right actions"><a class="navbar-link login" href="#">Log In</a> <a class="btn btn-default action-button" role="button" href="#">Sign Up</a></p>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <h1 class="text-center">KAIZEN</h1>
+    <h2 class="text-center">smart guided effort for an easier life</h2>
+    <img class="img-responsive" src="assets/img/project2_cleanDesk.jpg">
+
+    <div class="features-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Features</h2>
+                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            </div>
+            <div class="row features">
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-clock-o icon"></i>
+                    <h3 class="name">Always available</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-list-alt icon"></i>
+                    <h3 class="name">Customizable</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-leaf icon"></i>
+                    <h3 class="name">Efficient </h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+            </div>
+        </div>
+        <img class="img-responsive" src="assets/img/project2_appleProducts.jpg">
+    </div>
+
+    <div class="features-clean">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Compatibility </h2>
+                <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+            </div>
+            <div class="row features">
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-laptop icon"></i>
+                    <h3 class="name">Computers </h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-tablet icon"></i>
+                    <h3 class="name">Tablets </h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 item"><i class="fa fa-mobile-phone icon"></i>
+                    <h3 class="name">Cellphones </h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est.</p>
+                </div>
+            </div>
+        </div>
+        <img class="img-responsive" src="assets/img/project2_bonsaiTree-1.jpg">
+        <h3 class="text-center">"WHAT WE DO TODAY IS WHAT MATTERS MOST"</h3>
+    </div>
+
+    <div>
+    </div>
+
+    <div class="footer-basic">
+        <footer>
+            <div class="social">
+              <a href="#"><i class="icon ion-social-instagram"></i></a>
+              <a href="https://github.com/TheMartinUriarte/kaizen"><i class="fa fa-github"></i></a>
+              <a href="mailto: themartinuriarte.programmer@gmail.com"><i class="fa fa-envelope"></i></a>
+            </div>
+
+            <ul class="list-inline">
+                <li><a href="#" target="_top">Home</a></li>
+                <li><a href="#">About </a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+
+            <p class="copyright">Kaizen © 2017</p>
+        </footer>
+    </div>
+
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js' %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js' %>
+
+</body>
+
+</html>
+
+<!-- <% if current_manager %>
   <%= Manager.find(current_manager) %>
-<% end %>
+<% end %> -->
