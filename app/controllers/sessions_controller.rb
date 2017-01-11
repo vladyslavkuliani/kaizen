@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
   def show
     @project = Project.find_by_title(params[:title])
 
-    sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0}}
+    sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0, zero_count: 0}}
 
     tasks_ids = []
     dev_ids = []
@@ -41,14 +41,35 @@ class SessionsController < ApplicationController
     developers_levels.each do |task_levels|
       task_levels.each_with_index do |level, index|
         sum_skills_level_per_task[index][:value] += level
+        if level == 0
+          sum_skills_level_per_task[index][:zero_count] += 1
+        end
       end
     end
 
-    sum_skills_level_per_task.sort_by!{|obj| obj[:value]}
-
-    if sum_skills_level_per_task.count > @project.tasks.count
-      sum_skills_level_per_task.shift
+    zero_count_same = true
+    sum_skills_level_per_task.each_with_index do |obj, index|
+      if index!=0 && (obj[:zero_count] != sum_skills_level_per_task[index-1][:zero_count])
+        zero_count_same = false
+        break
+      end
     end
+
+    if zero_count_same
+      sum_skills_level_per_task.sort_by!{|obj| obj[:value]}
+    else
+      sum_skills_level_per_task.sort_by!{|obj| obj[:zero_count]}
+    end
+
+    while sum_skills_level_per_task.count > @project.tasks.count
+      if zero_count_same
+        sum_skills_level_per_task.shift
+      else
+        sum_skills_level_per_task.pop
+      end
+    end
+
+    sum_skills_level_per_task.reverse! if !zero_count_same
 
     sum_skills_level_per_task.each do |obj|
       max = 0
