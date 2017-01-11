@@ -48,9 +48,6 @@ section {
 		padding: 40px 0;
 		color: #fff;
 	}
-	&.testimonials {
-		margin: 50px 0;
-	}
 }
 
 .features {
@@ -362,31 +359,6 @@ section {
 			min-height: 0;
 		}
 	}
-}
-
-.jumbotron .container {
-    max-width: 100%;
-    padding: 0px;
-}
-
-
-
-@media (min-width: 1200px){
-  .container {
-      width: 99%;
-  }
-}
-
-@media (min-width: 992px){
-  .container {
-      width: 99%;
-  }
-}
-
-@media (min-width: 768px){
-  .container {
-      width: 99%;
-  }
 }
 
 .footer-basic {
