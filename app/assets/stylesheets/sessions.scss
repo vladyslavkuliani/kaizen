@@ -364,18 +364,12 @@ section {
 	}
 }
 
-
-
-.container {
-    margin-right: 0px;
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    .jumbotron {
-        max-width: 100%;
-        padding: 0px;
-    }
+.jumbotron .container {
+    max-width: 100%;
+    padding: 0px;
 }
+
+
 
 @media (min-width: 1200px){
   .container {
