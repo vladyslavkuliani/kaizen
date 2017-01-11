@@ -7,13 +7,14 @@
   <%= task.deadline %><br>
   Required Skills:<br>
   <% task.skills.each do |skill| %>
-    <% task.developers.each do |dev| %>
-      <% if Developerskill.where({developer_id: dev.id, skill_id: skill.id}) != nil %>
-        <% Developerskill.where({developer_id: dev.id, skill_id: skill.id}).each do |devskill| %>
-        <%= dev.name %>, <%= skill.name %>, <%= devskill.level %><br>
+      <% if Developerskill.where({skill_id: skill.id}) != nil %>
+        <% Developerskill.where({skill_id: skill.id}).each do |devskill| %>
+        <% if task.developer %>
+        <%= task.developer.name %>,
+        <% end %>
+        <%= skill.name %>, <%= devskill.level %><br>
         <% end %>
       <% end %>
-    <% end %>
   <% end %>
   <br>
 <% end %>

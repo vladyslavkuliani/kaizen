@@ -12,7 +12,7 @@ class DevelopersController < ApplicationController
     if params[:skills] == nil
       redirect_to "/staff/new"
     else
-      new_developer = Developer.create(dev_params)
+      new_developer = current_manager.developers.create(dev_params)
 
       params[:skills].each do |skill_id_index|
         id = skill_id_index.split("|")[0].to_i

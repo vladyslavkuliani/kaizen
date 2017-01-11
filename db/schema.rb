@@ -19,8 +19,11 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.string   "name"
     t.string   "email"
     t.float    "salary"
+    t.boolean  "taken"
+    t.integer  "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_developers_on_manager_id", using: :btree
   end
 
   create_table "developerskills", force: :cascade do |t|
@@ -31,15 +34,6 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
     t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
-  end
-
-  create_table "developertasks", force: :cascade do |t|
-    t.integer  "task_id"
-    t.integer  "developer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["developer_id"], name: "index_developertasks_on_developer_id", using: :btree
-    t.index ["task_id"], name: "index_developertasks_on_task_id", using: :btree
   end
 
   create_table "managers", force: :cascade do |t|
@@ -70,6 +64,7 @@ ActiveRecord::Schema.define(version: 20170110222116) do
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "developer_id"
     t.string   "title"
     t.string   "description"
     t.string   "cost"
@@ -79,6 +74,7 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.datetime "updated_at",     null: false
     t.integer  "project_id"
     t.date     "deadline"
+    t.index ["developer_id"], name: "index_tasks_on_developer_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 

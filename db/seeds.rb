@@ -8,6 +8,8 @@
 require 'ffaker'
 
 Skill.destroy_all
+Developer.destroy_all
+
 skills = []
 50.times do
   skills << FFaker::Skill.tech_skill

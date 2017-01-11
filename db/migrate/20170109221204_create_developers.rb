@@ -4,6 +4,9 @@ class CreateDevelopers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :email
       t.float :salary
+      t.boolean :taken
+
+      t.belongs_to :manager
 
       t.timestamps
     end
