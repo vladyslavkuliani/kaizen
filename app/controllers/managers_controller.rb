@@ -7,9 +7,9 @@ class ManagersController < ApplicationController
     manager = Manager.new(manager_params)
     if manager.save
       session[:manager_id] = manager.id
-      redirect_to '/'
+      redirect_to profile_path
     else
-      redirect_to '/signup'
+      redirect_to signup_path
     end
   end
 
