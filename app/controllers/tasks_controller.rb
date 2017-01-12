@@ -52,7 +52,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    Task.destroy(task)
+    p task
+    Task.find_by_title(task).destroy
     redirect_to profile_path
   end
 
