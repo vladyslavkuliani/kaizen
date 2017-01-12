@@ -77,6 +77,9 @@ class SessionsController < ApplicationController
     end
 
     @tasks = Task.where({project_id: @project.id})
+
+    total_time
+
   end
 
   def destroy
@@ -99,6 +102,25 @@ class SessionsController < ApplicationController
       end
     end
     arr
+  end
+
+
+  def total_time
+    @total_time = []
+
+    @tasks.each do |task|
+      time = 0
+      task.skills.each do |skill|
+        current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
+        current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
+        time += current_task[0].hours_needed * 2.5 /current_dev[0].level
+      end
+      @total_time<<time
+    end
+
+    @max_time_in_days= (@total_time.max/5).floor
+    @max_time_hours = @total_time.max % 5
+
   end
 
 end
