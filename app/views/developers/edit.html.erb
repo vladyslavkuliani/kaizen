@@ -1,23 +1,30 @@
 <h1>Edit a developer's information</h1>
 <hr>
-<%=form_for :developer, :method => :put do |f|%>
+<%=form_for :developer, url: dev_path(@developer.name), :method => :put do |f|%>
+  <%= f.hidden_field :manager_id, :value => @developer.manager_id %>
   Name: <%=f.text_field :name%><br>
   Email: <%=f.email_field :email%><br>
   Salary: <%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><span>$</span>
   <h3>Skill Set: </h3>
   <div class="skills-scroll" data-spy="scroll">
-    <%@skills.each_with_index do |skill,indx|%>
-      <% idx = 0 %>
-      <%= @dev_skills[@idx][:dev_skill_obj].name %>
-        <% if skill.name == @dev_skills[idx][:dev_skill_obj].name %>
-          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s, checked: true%>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: @dev_skills[@idx][:level])%><br>
-          <%= @idx += 1 %>
-        <% else %>
-          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
+
+    <%@skills.each_with_index do |skill, index|%>
+
+      <%dev_skill_level = Developerskill.where({developer_id: @developer.id, skill_id: skill.id})%>
+      <%dev_skill_level.each do |jt|%>
+        <%@level = jt.level%>
+      <%end%>
+
+      <%indx = @dev_skills.index({dev_skill_obj: skill.name, level: @level})%>
+      <% if indx!=nil%>
+        <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s, checked: true%>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: @dev_skills[indx][:level])%><br>
+      <%else%>
+          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s%>
           Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
-        <% end %>
+      <%end%>
     <%end%>
+
   </div>
   <%=f.submit(class: 'btn btn-success')%>
 <%end%>

@@ -19,9 +19,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def edit
     @task = Task.find_by_title(task)
     @project = Project.find(@task.project_id)
@@ -30,6 +27,7 @@ class TasksController < ApplicationController
   def update
     updated_task = Task.find_by_title(task)
     if params[:skills] != nil
+      updated_task.skills.clear
       params[:skills].each do |skill|
         updated_task.skills << Skill.find(skill)
       end

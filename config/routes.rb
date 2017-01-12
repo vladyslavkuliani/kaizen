@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   put '/profile' => 'managers#update'
   delete '/profile' => 'managers#destroy'
 
-  # get '/projects' => 'projects#index', as: 'projects'
   get '/projects/new' => 'projects#new', as: 'new_project'
   post '/projects' => 'projects#create'
   get '/projects/:title' => 'projects#show', as: 'project'
