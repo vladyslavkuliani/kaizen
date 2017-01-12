@@ -24,6 +24,10 @@ class SessionsController < ApplicationController
   def show
     @project = Project.find_by_title(params[:title])
 
+    @project.tasks.each do |t|
+      t.update({taken:false})
+    end
+
     sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0, zero_count: 0}}
 
     tasks_ids = []

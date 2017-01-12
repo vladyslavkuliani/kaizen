@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
     end
     if new_task
-      redirect_to profile_path
+      redirect_to project_path({title: @project.title})
     else
       flash[:error] = new_task.errors.full_messages.join("\n")
     end
@@ -52,8 +52,10 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    Task.find_by_title(task).destroy
-    redirect_to profile_path
+    current_task = Task.find_by_title(task)
+    project = Project.find(current_task.project_id)
+    current_task.destroy
+    redirect_to project_path({title: project.title})
   end
 
   private
