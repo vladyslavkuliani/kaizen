@@ -15,21 +15,27 @@
   </head>
 
   <body>
-  <div>
-    <nav class="navbar navbar-default navbar-fixed-top navigation-clean-button">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <%= link_to(image_tag('http://i.imgur.com/GxaU1bQ.png', class: 'img-responsive'), '/', class: 'navbar-brand navbar-link') %>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            </div>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <p class="navbar-text navbar-right actions"><%= link_to("Log In", login_path, class: 'navbar-link login') %> <%= link_to("Sign Up", signup_path, class: 'btn btn-default action-button') %></p>
-            </div>
-        </div>
-    </nav>
-  </div>
+    <div>
+      <nav class="navbar navbar-default navbar-fixed-top navigation-clean-button">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <%= link_to(image_tag('http://i.imgur.com/GxaU1bQ.png', class: 'img-responsive'), '/', class: 'navbar-brand navbar-link') %>
+                  <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              </div>
+              <div class="collapse navbar-collapse" id="navcol-1">
+                <p class="navbar-text navbar-right actions">
+                  <% if current_manager %>
+                    <%= link_to('Signed in as ' + current_manager.name, profile_path, :method => :get, class: 'btn btn-success nav-btn') %> <%= link_to("Logout", logout_path, :method => :get, class: 'btn btn-success nav-btn') %>
+                  <% else %>
+                    <%= link_to("Log In", login_path, class: 'navbar-link login') %> <%= link_to("Sign Up", signup_path, class: 'btn btn-default action-button') %>
+                  <% end %>
+                </p>
+              </div>
+          </div>
+      </nav>
+    </div>
 
-      <%= yield %>
+    <%= yield %>
 
   </body>
 </html>

@@ -7,6 +7,7 @@ class CreateTasks < ActiveRecord::Migration[5.0]
       t.string :cost
       t.string :status
       t.integer :priority_level
+      t.boolean :taken
 
       t.timestamps
     end

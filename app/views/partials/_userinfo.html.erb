@@ -1,0 +1,46 @@
+
+  <div class="col-lg-3">
+    <div class="panel panel-default">
+      <br>
+      <br>
+      <br>
+      <div class="panel-body">
+        <div class="clearfix text-center m-t">
+          <div class="inline">
+              <div class="thumb-xl avatar m-t-n-xxl">
+                <img src="" class="img-circle">
+              </div>
+              <br>
+            <div class="h4 m-t m-b-xs"><%= @manager.name %> <%= @manager.last %></div>
+            <br>
+            <small class="text-muted m-b">  <%=@manager.created_at.getlocal%></small>
+            <br>
+            <div class="h4 m-t m-b-xs"><%= @manager.company %></div>
+            <br>
+          </div>
+        </div>
+      </div>
+      <footer class="panel-footer bg-info text-center no-padder">
+        <div class="row no-gutter">
+          <div class="col-xs-4">
+            <div class="wrapper">
+              <span class="m-b-xs h3 block text-white">245</span>
+              <small class="text-muted">Followers</small>
+            </div>
+          </div>
+          <div class="col-xs-4 dk">
+            <div class="wrapper">
+              <span class="m-b-xs h3 block text-white">55</span>
+              <small class="text-muted">Following</small>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <div class="wrapper">
+              <span class="m-b-xs h3 block text-white"><%= @manager.projects.count %></span>
+              <small class="text-muted">Projects</small>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>

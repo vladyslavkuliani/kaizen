@@ -13,7 +13,7 @@ class TasksController < ApplicationController
       end
     end
     if new_task.save
-      redirect_to projects_path
+      redirect_to profile_path
     else
       flash[:error] = new_task.errors.full_messages.join("\n")
     end

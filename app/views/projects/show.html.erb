@@ -32,7 +32,7 @@
       <%= f.submit(class: 'btn btn-success') %>
     <% end %>
   </div>
-  <% @project.tasks.order(:updated_at).reverse_order.each do |task| %>
+  <% @project.tasks.each do |task| %>
     <p><%= task.title %><br>
     <%= task.deadline %><br>
     <%= task.description %><br></p>

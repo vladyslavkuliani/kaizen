@@ -16,14 +16,64 @@ class SessionsController < ApplicationController
       redirect_to profile_path
     else
     # If user's login doesn't work, send them back to the login form.
+      flash[:error] = "Wrong email or password!"
       redirect_to login_path
     end
   end
 
   def show
     @project = Project.find_by_title(params[:title])
+
+    sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0, zero_count: 0}}
+
+    tasks_ids = []
+    dev_ids = []
+    current_manager.developers.each do |developer|
+      dev_ids << developer.id
+    end
+
+    developers_levels = []
+
     @project.tasks.each do |task|
-      set_developer(task)
+      tasks_ids << task.id
+      developers_levels << skills_level_per_task(task)
+    end
+
+    developers_levels.each do |task_levels|
+      task_levels.each_with_index do |level, index|
+        sum_skills_level_per_task[index][:value] += level
+        if level == 0
+          sum_skills_level_per_task[index][:zero_count] += 1
+        end
+      end
+    end
+
+    sum_skills_level_per_task.sort_by!{|obj| obj[:zero_count]}
+
+    while sum_skills_level_per_task.count > @project.tasks.count
+      sum_skills_level_per_task.pop
+    end
+
+    sum_skills_level_per_task.sort_by!{|obj| obj[:value]}
+
+    sum_skills_level_per_task.each do |obj|
+      max = 0
+      task_id = nil
+      dev_id = dev_ids[obj[:index]]
+
+      developers_levels.each_with_index do |task_levels, index|
+        if task_levels[obj[:index]] >= max && !Task.find(tasks_ids[index]).taken
+          max =  task_levels[obj[:index]]
+          task_id = tasks_ids[index]
+        end
+      end
+
+      if task_id != nil
+        task = Task.find(task_id)
+        Developer.find(dev_id).task = task
+        task.update({taken: true})
+      end
+
     end
 
     @tasks = Task.where({project_id: @project.id})
@@ -35,43 +85,20 @@ class SessionsController < ApplicationController
   end
 
   private
-  def countAv(task, dev)
-    av = []
 
-    join_table = {}
-
-    task.skills.each do |skill|
-      join_table = Developerskill.where({skill_id: skill.id, developer_id: dev.id})
-      if join_table != []
-        join_table.each do |devskill|
-          av << devskill.level
+  def skills_level_per_task(task)
+    arr = Array.new(current_manager.developers.count){|i| i=0}
+    current_manager.developers.each_with_index do |dev, index|
+      task.skills.each do |skill|
+        join_table = Developerskill.where({developer_id: dev.id, skill_id: skill.id})
+        if join_table != []
+          join_table.each do |dev_skill|
+            arr[index]+=dev_skill.level
+          end
         end
-      else
-        av << 0
       end
     end
-    av.reduce(:+)/av.count if !av.empty?
-  end
-
-  def set_developer(task)
-    developers_average = []
-    current_manager.developers.each do |dev|
-      developers_average << {av: countAv(task, dev), dev_id: dev.id}
-    end
-
-    developers_average.sort_by!{|obj| obj[:av]}
-    developers_average.reverse!
-
-    developers_average.each do |dev|
-      if !Developer.find(dev[:dev_id]).taken
-        Developer.find(dev[:dev_id]).update({taken: true, task: task})
-        return
-      end
-    end
-
-    # if everybody taken return the guy with best average!
-    task.developer = Developer.find(developers_average[0][:dev_id])
-    return
+    arr
   end
 
 end
