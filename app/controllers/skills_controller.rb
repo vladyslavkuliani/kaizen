@@ -19,6 +19,24 @@ class SkillsController < ApplicationController
     @skill = Skill.find_by_name(skill)
   end
 
+  def edit
+    @skill = Skill.find_by_name(skill)
+  end
+
+  def update
+    updated_skill = Skill.find_by_name(skill)
+    if updated_skill.update(skill_params)
+      redirect_to skills_path
+    else
+      redirect_to edit_skill_path(skill)
+    end
+  end
+
+  def destroy
+    Skill.find_by_name(skill).destroy
+    redirect_to skills_path
+  end
+
   private
 
   def skill

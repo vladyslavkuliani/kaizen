@@ -13,6 +13,11 @@ class ManagersController < ApplicationController
     end
   end
 
+  def profile
+    @manager = current_manager
+    @projects = Project.where({manager_id: current_manager}).order(:updated_at).reverse_order
+  end
+
 private
 
   def manager_params

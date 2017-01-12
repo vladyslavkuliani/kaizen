@@ -10,21 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109231627) do
+ActiveRecord::Schema.define(version: 20170110222116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "developers", force: :cascade do |t|
     t.string   "name"
-    t.string   "salary"
+    t.string   "email"
+    t.float    "salary"
+    t.boolean  "taken"
+    t.integer  "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_developers_on_manager_id", using: :btree
   end
 
   create_table "developerskills", force: :cascade do |t|
     t.integer  "developer_id"
     t.integer  "skill_id"
+    t.integer  "level"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
@@ -44,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170109231627) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "deadline"
+    t.date     "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "manager_id"
@@ -53,12 +58,13 @@ ActiveRecord::Schema.define(version: 20170109231627) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.string   "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "developer_id"
     t.string   "title"
     t.string   "description"
     t.string   "cost"
@@ -67,6 +73,8 @@ ActiveRecord::Schema.define(version: 20170109231627) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "project_id"
+    t.date     "deadline"
+    t.index ["developer_id"], name: "index_tasks_on_developer_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 

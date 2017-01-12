@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-2 col-sm-2 col-xs-4 full-height">
+    <%= render partial: '/partials/nav' %>
+  </div>
+  <div class="col-md-10 col-sm-10 col-xs-8 ">
+    <%= render partial: '/partials/userinfo' %>
+    Projects:<br>
+    <% @projects.each do |project| %>
+      <p>
+        <%= link_to project.title, project_path(project.title) %><br>
+        <%= project.deadline %><br>
+        <%= project.description %><br>
+      </p>
+    <% end %>
+
+      <%=button_to "Add New Skill", new_skill_path, method: :get, class: "btn btn-info"%>
+      <br>
+      <%=button_to "Add New Developer", new_dev_path, method: :get, class: "btn btn-info"%>
+      <br>
+      <%=button_to "Add New Project", new_project_path, method: :get, class: "btn btn-info"%>
+  </div>
+</div>
+

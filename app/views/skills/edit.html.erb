@@ -1,0 +1,8 @@
+<h1>This is edit.html from skills controller</h1>
+<%= form_for :skill, url: skill_path(@skill.name), :method => :put do |f| %>
+  <span>Name: </span>
+  <%= f.text_field :name %><br>
+  <span class="description">Description: </span>
+  <%= f.text_area :description %><br>
+  <%= f.submit(class: 'btn btn-success') %>
+<% end %>

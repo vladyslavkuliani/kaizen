@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Kaizen</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/lumen/bootstrap.min.css', media: 'all' %>
-    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic', media: 'all' %>
     <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', media: 'all' %>
     <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css', media: 'all' %>
-
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link rel="shortcut icon" href="http://i.imgur.com/WcnucBI.png" type="image/x-icon">
+    <%= favicon_link_tag "http://i.imgur.com/WcnucBI.png" %>
+
     <link rel="apple-touch-icon" sizes="144x144" href="http://i.imgur.com/5YhmK7O.png">
     <link rel="apple-touch-icon" sizes="114x114" href="http://i.imgur.com/rk2YWFn.png">
-
 
   </head>
 
   <body>
-  <div>
-    <nav class="navbar navbar-default navbar-fixed-top navigation-clean-button">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand navbar-link" href="#">
-                    <img class="img-responsive" src="http://i.imgur.com/GxaU1bQ.png">
-                </a>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            </div>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <p class="navbar-text navbar-right actions"><%= link_to("Log In", login_path, class: 'navbar-link login') %> <%= link_to("Sign Up", signup_path, class: 'btn btn-default action-button') %></p>
-            </div>
-        </div>
-    </nav>
-  </div>
+    <div>
+      <nav class="navbar navbar-default navbar-fixed-top navigation-clean-button">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <%= link_to(image_tag('http://i.imgur.com/GxaU1bQ.png', class: 'img-responsive'), '/', class: 'navbar-brand navbar-link') %>
+                  <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              </div>
+              <div class="collapse navbar-collapse" id="navcol-1">
+                <p class="navbar-text navbar-right actions">
+                  <% if current_manager %>
+                    <%= link_to('Signed in as ' + current_manager.name, profile_path, :method => :get, class: 'btn btn-success nav-btn') %> <%= link_to("Logout", logout_path, :method => :get, class: 'btn btn-success nav-btn') %>
+                  <% else %>
+                    <%= link_to("Log In", login_path, class: 'navbar-link login') %> <%= link_to("Sign Up", signup_path, class: 'btn btn-default action-button') %>
+                  <% end %>
+                </p>
+              </div>
+          </div>
+      </nav>
+    </div>
 
-      <%= yield %>
-       <!-- ^ Keep this and then delete this line -->
+    <%= yield %>
+
   </body>
 </html>

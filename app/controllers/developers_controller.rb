@@ -5,14 +5,14 @@ class DevelopersController < ApplicationController
 
   def new
     @developer = Developer.new()
-    @skills = Skill.all
+    @skills = Skill.all.order(:name)
   end
 
   def create
-    if !params[:skills]
+    if params[:skills] == nil
       redirect_to "/staff/new"
     else
-      new_developer = Developer.create(dev_params)
+      new_developer = current_manager.developers.create(dev_params)
 
       params[:skills].each do |skill_id_index|
         id = skill_id_index.split("|")[0].to_i
@@ -22,16 +22,32 @@ class DevelopersController < ApplicationController
 
         developer_skill = Developerskill.where({developer_id: new_developer.id, skill_id: id})
         developer_skill.update_all(level: params[:level][index])
+
       end
+      redirect_to profile_path
     end
   end
 
   def show
-    @developer = Developer.find(params[:name])
+    @developer = Developer.find_by_name(params[:name])
+  end
+
+  def edit
+    @developer = Developer.find_by_name(params[:name])
+    @skills = Skill.all.order(:name)
+    @dev_skills = []
+    Developerskill.where({developer_id: @developer}).each do |devskill|
+      @dev_skills << {skill: Skill.find(devskill.skill_id), level: devskill.level}
+    end
+  end
+
+  def update
+
   end
 
   def destroy
-    Developer.find(name: params[:name]).destroy
+    Developer.find_by_name(params[:name]).destroy
+    redirect_to devs_path
   end
 
   private

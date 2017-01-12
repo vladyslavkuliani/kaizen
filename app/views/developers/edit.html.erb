@@ -1,0 +1,23 @@
+<h1>Edit a developer's information</h1>
+<hr>
+<%=form_for :developer, :method => :put do |f|%>
+  Name: <%=f.text_field :name%><br>
+  Email: <%=f.email_field :email%><br>
+  Salary: <%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><span>$</span>
+  <h3>Skill Set: </h3>
+  <div class="skills-scroll" data-spy="scroll">
+    <%@skills.each_with_index do |skill,indx|%>
+      <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
+      <% @dev_skills.each do |dev_skill|%>
+        <%= dev_skill[:skill].name == skill.name %>
+        <%= skill.name %>
+        <% if skill.name == dev_skill[:skill].name %>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
+        <% else %>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
+        <% end %>
+      <% end %>
+    <%end%>
+  </div>
+  <%=f.submit(class: 'btn btn-success')%>
+<%end%>
