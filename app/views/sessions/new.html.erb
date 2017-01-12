@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<!-- <h1>Login</h1>
 
 <%=flash[:error] %>
 
@@ -8,4 +8,22 @@
   Password: <%= password_field_tag :password %>
   <%= submit_tag "Submit" %>
 
-<% end %>
+<% end %> -->
+
+<div class="login-2">
+    <form method="post">
+        <div class="illustration">
+          <img src="http://i.imgur.com/GxaU1bQ.png">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Log In</button>
+        </div>
+    </form>
+</div>
+</body>
