@@ -12,7 +12,6 @@ class SkillsController < ApplicationController
    Skill.create(
     skill_params
    )
-   p skill_params
    redirect_to('/skills')
   end
 
@@ -26,18 +25,22 @@ class SkillsController < ApplicationController
 
   def update
     updated_skill = Skill.find_by_name(skill)
-    p skill_params
     if updated_skill.update(skill_params)
-      redirect_to skill_path(updated_skill.name)
+      redirect_to skills_path
     else
-      redirect_to edit_skill_path(updated_skill.name)
+      redirect_to edit_skill_path(skill)
     end
+  end
+
+  def destroy
+    Skill.find_by_name(skill).destroy
+    redirect_to skills_path
   end
 
   private
 
   def skill
-    params[:skill]
+    params[:name]
   end
 
   def skill_params

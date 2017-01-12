@@ -34,9 +34,10 @@ class DevelopersController < ApplicationController
 
   def edit
     @developer = Developer.find_by_name(params[:name])
-    @skills = []
+    @skills = Skill.all.order(:name)
+    @dev_skills = []
     Developerskill.where({developer_id: @developer}).each do |devskill|
-      @skills << Skill.find(devskill.skill_id)
+      @dev_skills << {skill: Skill.find(devskill.skill_id), level: devskill.level}
     end
   end
 
@@ -45,7 +46,8 @@ class DevelopersController < ApplicationController
   end
 
   def destroy
-    Developer.find(name: params[:name]).destroy
+    Developer.find_by_name(params[:name]).destroy
+    redirect_to devs_path
   end
 
   private

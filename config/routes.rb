@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   # get '/tasks/new' => 'tasks#new', as: 'new_task'
   post '/tasks' => 'tasks#create'
-  # get '/tasks/:title' => 'tasks#show', as: 'task'
+  get '/tasks/:title' => 'tasks#show', as: 'task'
   get '/tasks/:title/edit' => 'tasks#edit', as: 'edit_task'
   put '/tasks/:title' => 'tasks#update'
   delete '/tasks/:title' => 'tasks#destroy'
@@ -42,9 +42,9 @@ Rails.application.routes.draw do
   get '/skills' => 'skills#index', as: 'skills'
   get '/skills/new' => 'skills#new', as: 'new_skill'
   post '/skills' => 'skills#create'
-  get '/skills/:skill' => 'skills#show', as: 'skill'
-  get '/skills/:skill/edit' => 'skills#edit', as: 'edit_skill'
-  put '/skills/:skill' => 'skills#update'
-  delete '/skills/:skill' => 'skills#destroy'
+  get '/skills/:name' => 'skills#show', as: 'skill'
+  get '/skills/:name/edit' => 'skills#edit', as: 'edit_skill'
+  put '/skills/:name' => 'skills#update'
+  delete '/skills/:name' => 'skills#destroy'
 
 end
