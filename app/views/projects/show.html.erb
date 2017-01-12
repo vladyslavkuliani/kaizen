@@ -16,10 +16,12 @@
       <span class="description">Description:</span> <%= f.text_area :description %><br>
 
       Skills required:<br>
-        <%Skill.all.each_with_index do |skill,indx|%>
+      <div class="skills-scroll" data-spy="scroll">
+        <%Skill.all.order(:name).each_with_index do |skill,indx|%>
           <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
-      Expected time: <%=number_field_tag "time[]" %><br>
+      Expected time (in hours): <%=number_field_tag "time[]" %><br>
         <%end%>
+      </div>
 
       <%= f.submit(class: 'btn btn-success') %>
     <% end %>

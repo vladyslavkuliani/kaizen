@@ -4,12 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def new
+    @manager = Manager.new
   end
 
   def create
-    manager = Manager.find_by_email(params[:email])
+    manager = Manager.find_by_email(manager_params[:email])
     # If the user exists AND the password entered is correct.
-    if manager && manager.authenticate(params[:password])
+    if manager && manager.authenticate(manager_params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
@@ -92,6 +93,10 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def manager_params
+    params.require(:manager).permit(:email, :password)
+  end
 
   def skills_level_per_task(task)
     arr = Array.new(current_manager.developers.count){|i| i=0}
