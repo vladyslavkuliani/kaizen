@@ -12,11 +12,23 @@
   <% end %>
   <div class="">
     Developer: <%=task.developer.name%>
-  </div><br>
+  </div>
+  <div class="">
+    It will take <%=task.developer.name%> <%= @time %> hours to complete <%= task.title %><br>
+  </div>
+  <br>
 <% end %>
 
 <h3>
   Time needed to complete this task:
 <%= @max_time_in_days %> Days and
 <%= @max_time_hours %> Hours
+<br>
+This is project is due in <%= @time_left_in_hours %> hours.
+<br>
+<% if @time_left_in_hours > @total_time.max %>
+Yay!! You'll be able to finish this project before the deadline.
+<% else %>
+Sorry you need to hire more people!
+<% end %>
 </h3>
