@@ -4,8 +4,7 @@
 	.image-holder {
 		display: table-cell;
 		width: auto;
-		// background: url(http://i.imgur.com/GxaU1bQ.png);
-		// background-size: contain;
+    background-color: rgba(255, 255, 255, 0.9);
 	}
 	.form-container {
 		display: table;
@@ -16,7 +15,7 @@
 	form {
 		display: table-cell;
 		width: 400px;
-		background-color: #fff;
+		background-color: rgba(255, 255, 255, 0.9);
 		padding: 40px 60px;
 		color: #61c9a8;
 		h2 {
@@ -58,4 +57,12 @@
 	.register-photo form {
 		padding: 40px;
 	}
+}
+
+img.img-responsive.signup-img {
+    width: 30%;
+    height: auto;
+    position: absolute;
+    top: 25%;
+    left: 23%;
 }
