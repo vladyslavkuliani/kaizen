@@ -18,8 +18,8 @@
       Skills required:<br>
       <div class="skills-scroll" data-spy="scroll">
         <%Skill.all.order(:name).each_with_index do |skill,indx|%>
-          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
-      Expected time (in hours): <%=number_field_tag "time[]" %><br>
+          <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%> <%=skill.name%>:<br>
+          Expected time to complete (in hours): <%=number_field_tag "time[]" %><br>
         <%end%>
       </div>
 
