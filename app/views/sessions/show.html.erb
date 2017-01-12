@@ -3,6 +3,7 @@
 <br>
 <strong>Tasks:</strong><br>
 <% @tasks.each do |task| %>
+
   <%= task.title %><br>
   <%= task.deadline %><br>
   Required Skills:
@@ -13,3 +14,9 @@
     Developer: <%=task.developer.name%>
   </div><br>
 <% end %>
+
+<h3>
+  Time needed to complete this task:
+<%= @max_time_in_days %> Days and
+<%= @max_time_hours %> Hours
+</h3>
