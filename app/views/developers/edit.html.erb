@@ -7,16 +7,16 @@
   <h3>Skill Set: </h3>
   <div class="skills-scroll" data-spy="scroll">
     <%@skills.each_with_index do |skill,indx|%>
-      <% @dev_skills.each do |dev_skill|%>
-        <% if skill.name == dev_skill[:dev_skill_name].name %>
+      <% idx = 0 %>
+      <%= @dev_skills[@idx][:dev_skill_obj].name %>
+        <% if skill.name == @dev_skills[idx][:dev_skill_obj].name %>
           <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s, checked: true%>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: dev_skill[:level])%><br>
-          <% break %>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: @dev_skills[@idx][:level])%><br>
+          <%= @idx += 1 %>
         <% else %>
           <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
           Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
         <% end %>
-      <% end %>
     <%end%>
   </div>
   <%=f.submit(class: 'btn btn-success')%>
