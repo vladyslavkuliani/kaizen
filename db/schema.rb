@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.string   "name"
     t.string   "email"
     t.float    "salary"
+    t.boolean  "taken"
     t.integer  "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,7 +70,6 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.string   "cost"
     t.string   "status"
     t.integer  "priority_level"
-    t.boolean  "taken"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "project_id"

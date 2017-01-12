@@ -1,7 +1,7 @@
 <h1>Projects#show</h1>
 <p>Find me in app/views/projects/show.html.erb</p>
 
-<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", @project, :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %> <%= link_to("Generate Workflow", workflow_path(@project.title), class: 'btn btn-success') %>
+<%= link_to("Edit", edit_project_path(@project.title), class: 'btn btn-info') %> <%= link_to("Delete", project_path(@project.title), :method => :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to delete this project?"}) %> <%= link_to("Generate Workflow", workflow_path(@project.title), class: 'btn btn-success') %>
 <p>
   <strong>Project Title:</strong> <%= @project.title %><br>
   <strong>Project Deadline:</strong> <%= @project.deadline %><br>

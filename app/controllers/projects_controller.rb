@@ -37,7 +37,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    Project.destroy(project)
+    Project.find_by_title(project).destroy
     redirect_to profile_path
   end
 
