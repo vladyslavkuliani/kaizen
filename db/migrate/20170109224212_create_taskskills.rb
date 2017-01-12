@@ -5,6 +5,7 @@ class CreateTaskskills < ActiveRecord::Migration[5.0]
 
       t.belongs_to :task
       t.belongs_to :skill
+      t.integer :hours_needed
     end
   end
 end

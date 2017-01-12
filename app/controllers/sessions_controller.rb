@@ -24,6 +24,10 @@ class SessionsController < ApplicationController
   def show
     @project = Project.find_by_title(params[:title])
 
+    @project.tasks.each do |t|
+      t.update({taken:false})
+    end
+
     sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0, zero_count: 0}}
 
     tasks_ids = []
@@ -77,6 +81,9 @@ class SessionsController < ApplicationController
     end
 
     @tasks = Task.where({project_id: @project.id})
+
+    total_time
+
   end
 
   def destroy
@@ -99,6 +106,30 @@ class SessionsController < ApplicationController
       end
     end
     arr
+  end
+
+
+  def total_time
+    @total_time = []
+
+    @tasks.each do |task|
+      time = 0
+      task.skills.each do |skill|
+        current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
+        current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
+
+        if current_dev[0] != nil
+          time += current_task[0].hours_needed * 2.5 /current_dev[0].level
+        else
+          time += current_task[0].hours_needed * 2.5
+        end
+      end
+      @total_time<<time
+    end
+
+    @max_time_in_days= (@total_time.max/5).floor
+    @max_time_hours = @total_time.max % 5
+
   end
 
 end

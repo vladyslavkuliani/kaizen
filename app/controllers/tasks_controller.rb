@@ -1,19 +1,23 @@
 class TasksController < ApplicationController
 
   def create
-    new_task = Task.new(task_params)
-    if params[:skills] != nil
-      params[:skills].each do |skill|
-        new_task.skills << Skill.find(skill)
-      end
+    @project = Project.find(task_params[:project_id])
+    new_task = @project.tasks.create(task_params)
+
+    params[:skills].each do |skill_id_index|
+      id = skill_id_index.split("|")[0].to_i
+      index = skill_id_index.split("|")[1].to_i
+
+      new_task.skills << Skill.find(id)
+      p index
+      p params[:time]
+
+      task_skill = Taskskill.where({task_id: new_task.id, skill_id: id})
+      task_skill.update_all(hours_needed: params[:time][index])
+
     end
-    if params[:developers] != nil
-      params[:developers].each do |dev|
-        new_task.developer = Developer.find(dev)
-      end
-    end
-    if new_task.save
-      redirect_to profile_path
+    if new_task
+      redirect_to project_path({title: @project.title})
     else
       flash[:error] = new_task.errors.full_messages.join("\n")
     end
@@ -46,11 +50,17 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    Task.find_by_title(task).destroy
-    redirect_to profile_path
+    current_task = Task.find_by_title(task)
+    project = Project.find(current_task.project_id)
+    current_task.destroy
+    redirect_to project_path({title: project.title})
   end
 
   private
+
+  def project
+    params[:title]
+  end
 
   def task
     params[:title]
