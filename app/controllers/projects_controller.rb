@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   def create
     new_project = Project.new(project_params)
     if new_project.save
-      redirect_to projects_path
+      redirect_to profile_path
     else
       flash[:error] = new_project.errors.full_messages.join("\n")
       redirect_to new_project_path
@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
   def update
     updated_project = Project.find_by_title(project)
     if updated_project.update(project_params)
-      redirect_to project_path(project)
+      redirect_to profile_path
     else
       flash[:error] = updated_project.errors.full_messages.join("\n")
       redirect_to edit_project_path(project)
@@ -37,8 +37,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    Project.destroy(project)
-    redirect_to projects_path
+    Project.find_by_title(project).destroy
+    redirect_to profile_path
   end
 
   private

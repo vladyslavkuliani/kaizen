@@ -10,13 +10,24 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap-3.3.7-lumen.min
  *= require bootstrap-3.3.7.min
+ *= require font-awesome.min
+ *= require ionicons.min
  *= require_tree .
- *= require_self
+ *= require sessions
  */
 
 .description {
   vertical-align: top;
+}
+
+
+.skills-scroll {
+  position: relative;
+  height: 100px;
+  overflow: auto;
+  width: 200px;
 }
 
 .full-height{
@@ -26,8 +37,6 @@
   background: rgb(46,60,84);
   color: #A2B4BC;
 }
-
-
 
  .link:hover{
    background: #02ceff;

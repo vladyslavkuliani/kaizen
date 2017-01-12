@@ -2,13 +2,14 @@ Developers#index
 
 <% @developers.each do |dev| %>
   <p>
-    Name: <%= dev.name %><br>
+    Name: <%= link_to dev.name, dev_path(dev.name) %><br>
     Email: <%= dev.email %><br>
     Salary: <%= dev.salary %><br>
-    Skills:<br>
-    <% dev.skills.each do |skill| %>
+    <span class="skills">Skills:</span><br>
+    <span class="skills-list"><% dev.skills.each do |skill| %>
       Name: <%= skill.name %><br>
-      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %>
+      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %><br>
     <% end %>
+    </span>
   </p>
 <% end %>

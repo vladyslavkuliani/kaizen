@@ -1,10 +1,23 @@
 <%= form_for :task, url: task_path(@task.title), :method => :put do |f| %>
   <%= f.hidden_field :project_id, :value => @project.id %>
   Title: <%= f.text_field :title %><br>
+  Deadline: <%= f.date_field :deadline %><br>
   <span class="description">Description:</span> <%= f.text_area :description %><br>
   Skills:<br>
-    <%Skill.all.each_with_index do |skill|%>
+  <div class="skills-scroll" data-spy="scroll">
+    <%Skill.all.each do |skill|%>
       <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
     <%end%>
+  </div>
+  Developers:<br>
+  <div class="skills-scroll" data-spy="scroll">
+    <% Developer.all.each do |dev| %>
+      <%= check_box_tag "developers[]", dev.id %> <%= dev.name %>: 
+      <% Developerskill.where({developer_id: dev}).each do |devskill| %>
+        <%= Skill.find(devskill.skill_id).name %> (<%= devskill.level %>), 
+      <% end %>
+      <br>
+    <% end %>
+  </div>
   <%= f.submit(class: 'btn btn-success') %>
 <% end %>

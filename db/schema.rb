@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110200120) do
+ActiveRecord::Schema.define(version: 20170110222116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20170110200120) do
     t.string   "name"
     t.string   "email"
     t.float    "salary"
+    t.integer  "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_developers_on_manager_id", using: :btree
   end
 
   create_table "developerskills", force: :cascade do |t|
@@ -70,14 +72,18 @@ ActiveRecord::Schema.define(version: 20170110200120) do
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "developer_id"
     t.string   "title"
     t.string   "description"
     t.string   "cost"
     t.string   "status"
     t.integer  "priority_level"
+    t.boolean  "taken"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "project_id"
+    t.date     "deadline"
+    t.index ["developer_id"], name: "index_tasks_on_developer_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 

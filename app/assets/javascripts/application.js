@@ -13,4 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-3.3.7.min
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+
+  $('.new-task').hide();
+
+  $('.task').on('click', function() {
+    $('.new-task').slideDown();
+  });
+
+  $('.task').on('dblclick', function() {
+    $('.new-task').slideUp();
+  });
+
+});
