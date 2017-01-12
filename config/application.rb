@@ -21,5 +21,10 @@ module KaizenApp
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    # Cronofy.configure do |config|
+    #   cronofy = Cronofy::Client.new(access_token: 'xoTQMfDkfJM19CBoBXIMFh4DKvUnDJlR')
+    #   calendars = cronofy.list_calendars
+    # end
+
   end
 end
