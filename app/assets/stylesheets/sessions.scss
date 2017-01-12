@@ -18,6 +18,7 @@ h1 {
 h2 {
 	font-size: 24px;
 	color: #61c9a8;
+  margin-bottom: 2%;
 }
 
 .h2 {
@@ -33,6 +34,11 @@ h3 {
 .h3 {
 	font-size: 24px;
 	color: #61c9a8;
+}
+
+img.img-responsive.heading-img {
+    padding-left: 43%;
+    padding-top: 7%;
 }
 
 .icon-feature {
@@ -359,6 +365,12 @@ section {
 			min-height: 0;
 		}
 	}
+}
+
+@media (max-width: 767px) {
+  .features-clean .item {
+    margin-left: 26%;
+  }
 }
 
 .footer-basic {
