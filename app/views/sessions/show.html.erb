@@ -6,18 +6,13 @@
 
   <%= task.title %><br>
   <%= task.deadline %><br>
-  Required Skills:<br>
+  Required Skills:
   <% task.skills.each do |skill| %>
-      <% if Developerskill.where({skill_id: skill.id}) != nil %>
-        <% Developerskill.where({skill_id: skill.id}).each do |devskill| %>
-        <% if task.developer %>
-        <%= task.developer.name %>,
-        <% end %>
-        <%= skill.name %>, <%= devskill.level %><br>
-        <% end %>
-      <% end %>
+      <%=skill.name%>
   <% end %>
-  <br>
+  <div class="">
+    Developer: <%=task.developer.name%>
+  </div><br>
 <% end %>
 
 <h3>
