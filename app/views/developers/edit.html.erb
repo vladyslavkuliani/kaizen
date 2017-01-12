@@ -7,13 +7,13 @@
   <h3>Skill Set: </h3>
   <div class="skills-scroll" data-spy="scroll">
     <%@skills.each_with_index do |skill,indx|%>
-      <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
       <% @dev_skills.each do |dev_skill|%>
-        <%= dev_skill[:skill].name == skill.name %>
-        <%= skill.name %>
-        <% if skill.name == dev_skill[:skill].name %>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
+        <% if skill.name == dev_skill[:dev_skill_name].name %>
+          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s, checked: true%>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: dev_skill[:level])%><br>
+          <% break %>
         <% else %>
+          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%>
           Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
         <% end %>
       <% end %>

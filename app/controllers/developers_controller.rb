@@ -37,7 +37,7 @@ class DevelopersController < ApplicationController
     @skills = Skill.all.order(:name)
     @dev_skills = []
     Developerskill.where({developer_id: @developer}).each do |devskill|
-      @dev_skills << {skill: Skill.find(devskill.skill_id), level: devskill.level}
+      @dev_skills << {dev_skill_name: Skill.find(devskill.skill_id), level: devskill.level}
     end
   end
 
