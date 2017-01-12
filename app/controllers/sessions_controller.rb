@@ -62,7 +62,7 @@ class SessionsController < ApplicationController
       dev_id = dev_ids[obj[:index]]
 
       developers_levels.each_with_index do |task_levels, index|
-        if task_levels[obj[:index]] >= max && !Task.find(tasks_ids[index]).taken
+        if task_levels[obj[:index]] >= max && !Task.find(tasks_ids[index])[:taken]
           max =  task_levels[obj[:index]]
           task_id = tasks_ids[index]
         end

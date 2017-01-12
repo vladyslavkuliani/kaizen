@@ -52,7 +52,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    p task
     Task.find_by_title(task).destroy
     redirect_to profile_path
   end
@@ -68,7 +67,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :deadline, :description, :cost, :status, :priority_level, :project_id)
+    params.require(:task).permit(:title, :deadline, :description, :cost, :status, :priority_level, :project_id, :taken)
   end
 
 end

@@ -6,10 +6,6 @@ class Task < ApplicationRecord
   has_many :skills, through: :taskskills
   belongs_to :developer, optional: true
 
-
-  has_many :developertasks, dependent: :destroy
-  has_many :developers, through: :developertasks
-
   validates :title, presence: true
   # validates :status, presence: true
   validate :deadline_cannot_be_earlier_than_today
