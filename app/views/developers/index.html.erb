@@ -8,7 +8,9 @@ Developers#index
     <span class="skills">Skills:</span><br>
     <span class="skills-list"><% dev.skills.each do |skill| %>
       Name: <%= skill.name %><br>
-      Proficiency Level: <%= Developerskill.find_by_skill_id(skill.id).level %><br>
+      
+      <% @dev_skill = Developerskill.where({developer_id: dev.id, skill_id: skill.id}) %>
+      Proficiency Level: <%= @dev_skill.first.level %><br>
     <% end %>
     </span>
   </p>

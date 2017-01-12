@@ -10,15 +10,11 @@
 
     <%@skills.each_with_index do |skill, index|%>
 
-      <%dev_skill_level = Developerskill.where({developer_id: @developer.id, skill_id: skill.id})%>
-      <%dev_skill_level.each do |jt|%>
-        <%@level = jt.level%>
-      <%end%>
+      <%dev_skill = Developerskill.where({developer_id: @developer.id, skill_id: skill.id}).first%>
 
-      <%indx = @dev_skills.index({dev_skill_obj: skill.name, level: @level})%>
-      <% if indx!=nil%>
+      <% if dev_skill != nil %>
         <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s, checked: true%>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: @dev_skills[indx][:level])%><br>
+          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: dev_skill.level)%><br>
       <%else%>
           <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s%>
           Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>

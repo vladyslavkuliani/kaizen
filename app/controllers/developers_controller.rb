@@ -35,10 +35,6 @@ class DevelopersController < ApplicationController
   def edit
     @developer = Developer.find_by_name(dev)
     @skills = Skill.all.order(:name)
-    @dev_skills = []
-    Developerskill.where({developer_id: @developer}).each do |devskill|
-      @dev_skills << {dev_skill_obj: Skill.find(devskill.skill_id).name, level: devskill.level}
-    end
   end
 
   def update
