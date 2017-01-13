@@ -18,7 +18,7 @@
 		width: 400px;
 		background-color: rgba(255, 255, 255, 0.9);
 		padding: 40px 60px;
-		color: #61c9a8;
+		color: #00001c;
 		h2 {
 			font-size: 24px;
 			line-height: 1.5;
@@ -64,6 +64,14 @@ img.img-responsive.signup-img {
     width: 30%;
     height: auto;
     position: absolute;
-    top: 16%;
+    top: 24%;
     left: 23%;
+}
+
+hr{
+	border-top: 1px solid #61c9a8;
+}
+
+i.fa.fa-github.signup-github {
+    font-size: 75px;
 }
