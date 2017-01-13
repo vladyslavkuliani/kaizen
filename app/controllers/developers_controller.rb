@@ -13,7 +13,7 @@ class DevelopersController < ApplicationController
 
   def create
     if params[:skills] == nil
-      redirect_to "/staff/new"
+      redirect_to "/team/new"
     else
       new_developer = current_manager.developers.create(dev_params)
 
