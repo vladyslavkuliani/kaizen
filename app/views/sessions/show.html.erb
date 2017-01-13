@@ -19,8 +19,9 @@
 <br>
 This is project is due in <%= @time_left_in_hours %> hours.
 <br>
-  <% if @time_left_in_hours > @total_time.max %>
-    Yay!! You'll be able to finish this project before the deadline.
-  <% else %>
-    Sorry you need to hire more people!
-  <% end %>
+
+<% if @time_left_in_hours > @total_time.max %>
+  Yay!! You'll be able to finish this project before the deadline.
+<% else %>
+  Sorry you need to hire more people!
+<% end %>

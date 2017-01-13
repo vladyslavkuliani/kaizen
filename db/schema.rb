@@ -35,15 +35,6 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.index ["skill_id"], name: "index_developerskills_on_skill_id", using: :btree
   end
 
-  create_table "developertasks", force: :cascade do |t|
-    t.integer  "task_id"
-    t.integer  "developer_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["developer_id"], name: "index_developertasks_on_developer_id", using: :btree
-    t.index ["task_id"], name: "index_developertasks_on_task_id", using: :btree
-  end
-
   create_table "managers", force: :cascade do |t|
     t.string   "name"
     t.string   "last"

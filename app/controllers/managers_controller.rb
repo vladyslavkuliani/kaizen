@@ -1,5 +1,7 @@
 class ManagersController < ApplicationController
 
+  before_action :authorize, only: [:profile]
+
   def new
   end
 
@@ -7,9 +9,9 @@ class ManagersController < ApplicationController
     manager = Manager.new(manager_params)
     if manager.save
       session[:manager_id] = manager.id
-      redirect_to profile_path
+      redirect_to '/profile'
     else
-      redirect_to signup_path
+      redirect_to '/signup'
     end
   end
 

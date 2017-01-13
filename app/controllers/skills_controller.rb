@@ -1,5 +1,7 @@
 class SkillsController < ApplicationController
 
+  before_action :authorize, except: [:index, :show]
+
   def index
     @skills = Skill.all.order(:name)
   end
@@ -26,15 +28,15 @@ class SkillsController < ApplicationController
   def update
     updated_skill = Skill.find_by_name(skill)
     if updated_skill.update(skill_params)
-      redirect_to skills_path
+      redirect_to '/skills'
     else
-      redirect_to edit_skill_path(skill)
+      redirect_to "/skills/#{skill}/edit"
     end
   end
 
   def destroy
     Skill.find_by_name(skill).destroy
-    redirect_to skills_path
+    redirect_to '/skills'
   end
 
   private

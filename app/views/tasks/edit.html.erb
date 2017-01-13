@@ -1,18 +1,38 @@
-<%= form_for :task, url: task_path(@task.title), :method => :put do |f| %>
+<%= form_for :task, url: "/tasks/#{URI.encode(@task.title)}", :method => :put do |f| %>
   <%= f.hidden_field :project_id, :value => @project.id %>
   Title: <%= f.text_field :title %><br>
   Deadline: <%= f.date_field :deadline %><br>
   <span class="description">Description:</span> <%= f.text_area :description %><br>
   Skills:<br>
   <div class="skills-scroll" data-spy="scroll">
-    <%Skill.all.each do |skill|%>
-      <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
+    <%Skill.all.order(:name).each do |skill|%>
+      <% @task_skill = nil %>
+      <% task_skill = Taskskill.where({skill_id: skill.id, task_id: @task.id}) %>
+      
+      <% task_skill.each do |task| %>
+        <% @task_skill = task %>
+      <% end %>
+
+      <% if @task_skill != nil %>
+        <%=skill.name%>: <%= check_box_tag "skills[]", skill.id, checked: true%><br>
+        Expected time to complete (in hours): <%= number_field_tag "time[]", @task_skill[:hours_needed] %><br>
+      <% else %>
+        <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
+        Expected time to complete (in hours): <%= number_field_tag "time[]" %><br>
+      <% end %>
     <%end%>
   </div>
+  
   Developers:<br>
   <div class="skills-scroll" data-spy="scroll">
     <% Developer.all.each do |dev| %>
-      <%= check_box_tag "developers[]", dev.id %> <%= dev.name %>: 
+      <% if @task.developer != nil && @task.developer.name == dev.name %>
+        <%= check_box_tag "developers[]", dev.id, checked: true %>
+      <% else %>
+        <%= check_box_tag "developers[]", dev.id %>
+      <% end %>
+
+      <%= dev.name %>: 
       <% Developerskill.where({developer_id: dev}).each do |devskill| %>
         <%= Skill.find(devskill.skill_id).name %> (<%= devskill.level %>), 
       <% end %>

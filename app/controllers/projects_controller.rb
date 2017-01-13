@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  before_action :authorize, except: [:show]
+
   def index
     @projects = Project.where({manager_id: session[:manager_id]}).order(:updated_at).reverse_order
   end
@@ -11,7 +13,7 @@ class ProjectsController < ApplicationController
   def create
     new_project = Project.new(project_params)
     if new_project.save
-
+      
       @cronofy = Cronofy::Client.new(access_token: 'xoTQMfDkfJM19CBoBXIMFh4DKvUnDJlR')
 
       @calendars = @cronofy.list_calendars
@@ -24,10 +26,10 @@ class ProjectsController < ApplicationController
       else
         p "you suck"
       end
-      redirect_to profile_path
+      redirect_to '/profile'
     else
       flash[:error] = new_project.errors.full_messages.join("\n")
-      redirect_to new_project_path
+      redirect_to '/projects/new'
     end
 
   end
@@ -39,10 +41,10 @@ class ProjectsController < ApplicationController
   def update
     updated_project = Project.find_by_title(project)
     if updated_project.update(project_params)
-      redirect_to project_path(project)
+      redirect_to "/projects/#{project}"
     else
       flash[:error] = updated_project.errors.full_messages.join("\n")
-      redirect_to edit_project_path(project)
+      redirect_to edit_"/projects/#{project}"
     end
   end
 
@@ -52,7 +54,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     Project.find_by_title(project).destroy
-    redirect_to profile_path
+    redirect_to '/profile'
   end
 
   private
