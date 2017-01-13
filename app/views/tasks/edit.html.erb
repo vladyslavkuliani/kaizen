@@ -1,4 +1,4 @@
-<%= form_for :task, url: task_path(@task.title), :method => :put do |f| %>
+<%= form_for :task, url: "/tasks/#{URI.encode(@task.title)}", :method => :put do |f| %>
   <%= f.hidden_field :project_id, :value => @project.id %>
   Title: <%= f.text_field :title %><br>
   Deadline: <%= f.date_field :deadline %><br>
@@ -15,9 +15,10 @@
 
       <% if @task_skill != nil %>
         <%=skill.name%>: <%= check_box_tag "skills[]", skill.id, checked: true%><br>
-        Expected time to complete (in hours): <%= number_field_tag "time[]", value: @task_skill.hours_needed %><br>
+        Expected time to complete (in hours): <%= number_field_tag "time[]", @task_skill[:hours_needed] %><br>
       <% else %>
         <%=skill.name%>: <%= check_box_tag "skills[]", skill.id%><br>
+        Expected time to complete (in hours): <%= number_field_tag "time[]" %><br>
       <% end %>
     <%end%>
   </div>

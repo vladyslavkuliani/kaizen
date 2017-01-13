@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  before_action :authorize, only: [:show]
+
   def index
   end
 
@@ -14,11 +16,11 @@ class SessionsController < ApplicationController
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to profile_path
+      redirect_to '/profile'
     else
     # If user's login doesn't work, send them back to the login form.
       flash[:error] = "Wrong email or password!"
-      redirect_to login_path
+      redirect_to '/login'
     end
   end
 
@@ -81,7 +83,7 @@ class SessionsController < ApplicationController
 
     end
 
-    @tasks = Task.where({project_id: @project.id})
+    @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
 
     total_time
 
@@ -89,7 +91,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:manager_id] = nil
-    redirect_to login_path
+    redirect_to '/login'
   end
 
   private
@@ -122,14 +124,20 @@ class SessionsController < ApplicationController
       task.skills.each do |skill|
         current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
         current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
-        @time += current_task[0].hours_needed * Math.sqrt(2.5) / Math.sqrt(current_dev[0].level)
+
+        if current_dev[0] != nil
+          @time += current_task[0].hours_needed * 2.5 /current_dev[0].level
+        else
+          @time += current_task[0].hours_needed * 2.5
+        end
       end
       @total_time<<@time
     end
+
     @time = @time.round(2)
     @max_time_in_days= (@total_time.max/5).floor
     @max_time_hours = (@total_time.max % 5).round(2)
-
+  
     @current_time = Time.now.getutc
     @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
 

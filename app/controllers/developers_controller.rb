@@ -1,4 +1,7 @@
 class DevelopersController < ApplicationController
+
+  before_action :authorize, except: [:index, :show]
+
   def index
     @developers = Developer.all
   end
@@ -24,7 +27,7 @@ class DevelopersController < ApplicationController
         developer_skill.update_all(level: params[:level][index])
 
       end
-      redirect_to profile_path
+      redirect_to '/profile'
     end
   end
 
@@ -52,15 +55,15 @@ class DevelopersController < ApplicationController
     end  
 
     if updated_dev.update(dev_params)
-      redirect_to devs_path
+      redirect_to '/team'
     else
-      redirect_to edit_dev_path(dev)
+      redirect_to "/team/#{dev.name}/edit"
     end
   end
 
   def destroy
     Developer.find_by_name(dev).destroy
-    redirect_to devs_path
+    redirect_to '/team'
   end
 
   private

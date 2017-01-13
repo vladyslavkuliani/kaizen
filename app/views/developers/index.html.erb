@@ -2,7 +2,7 @@ Developers#index
 
 <% @developers.each do |dev| %>
   <p>
-    Name: <%= link_to dev.name, dev_path(dev.name) %><br>
+    Name: <%= link_to dev.name, "/team/#{dev.name}" %><br>
     Email: <%= dev.email %><br>
     Salary: <%= dev.salary %><br>
     <span class="skills">Skills:</span><br>

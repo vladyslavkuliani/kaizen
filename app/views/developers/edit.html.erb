@@ -1,6 +1,6 @@
 <h1>Edit a developer's information</h1>
 <hr>
-<%=form_for :developer, url: dev_path(@developer.name), :method => :put do |f|%>
+<%=form_for :developer, url: "/team/#{@developer.name}", :method => :put do |f|%>
   <%= f.hidden_field :manager_id, :value => @developer.manager_id %>
   Name: <%=f.text_field :name%><br>
   Email: <%=f.email_field :email%><br>
