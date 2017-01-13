@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/about' => 'sessions#about'
   post '/workflow/:title' => 'sessions#new_email'
 
+
   get '/signup' => 'managers#new'
   post '/managers' => 'managers#create'
   get '/managers/:name' => 'managers#show', as: 'manager'

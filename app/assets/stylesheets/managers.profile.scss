@@ -5,6 +5,35 @@
   padding-top: 30%;
 }
 
-html{
+.dashboard-order {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
   background-color: white;
+  padding-top: 7%;
+  padding-left: 19%;
+}
+
+.profileDefault {
+  border: 2px solid #86af49;
+  padding: 10%;
+  margin-left: 15%;
+}
+
+.panel-default>.panel-heading {
+    color: #f5f5f5;
+    background-color: #86AF49;
+    border-color: #ddd;
+}
+
+a {
+  color: #ed9b40;
+  text-decoration: none;
+  &:hover{
+  color: #ed9b40;
+  }
 }
