@@ -1,6 +1,6 @@
 class SkillsController < ApplicationController
 
-  before_action :authorize, except: [:index, :show]
+  before_action :authorize
 
   def index
     @skills = Skill.all.order(:name)

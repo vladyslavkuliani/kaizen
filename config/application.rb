@@ -28,7 +28,7 @@ module KaizenApp
     config.active_record.raise_in_transactional_callbacks = true
 
     config.middleware.use OmniAuth::Builder do
-      provider :github, 'c259db25e71c6001e398', 'ccea0bde6cb0464f0a848d53199ff251b2f539c2'
+      provider :github, '752d9f0a3344cc25b514', 'f2f6f139bc61587be3209b0b4705122149b2a5f3'
     end
 
   end

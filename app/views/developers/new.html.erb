@@ -1,6 +1,6 @@
 <h1>Add new developer to your team</h1>
 <hr>
-<%=form_for :developer do |f|%>
+<%=form_for :developer, url: '/team' do |f|%>
   Name: <%=f.text_field :name%><br>
   Email: <%=f.email_field :email%><br>
   Salary: <%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><span>$</span>
