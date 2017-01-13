@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => :create
+  skip_before_filter :verify_authenticity_token, :only => :create_with_github
   before_action :authorize, only: [:show]
   def index
   end
@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
   def create
     manager = Manager.find_by_email(manager_params[:email])
     # If the user exists AND the password entered is correct.
-    if manager.email != "email@example.com" && (manager.authenticate(params[:password]) && manager)
+    if manager.email != "email@example.com" && (manager && manager.authenticate(manager_params[:password]))
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to '/profile'
+      redirect_to :profile
     else
     # If user's login doesn't work, send them back to the login form.
       flash[:error] = "Wrong email or password!"
