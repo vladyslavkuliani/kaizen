@@ -47,5 +47,5 @@ Rails.application.routes.draw do
   get '/skills/:name/edit' => 'skills#edit', as: 'edit_skill'
   put '/skills/:name' => 'skills#update'
   delete '/skills/:name' => 'skills#destroy'
-
+ 
 end
