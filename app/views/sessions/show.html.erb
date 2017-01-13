@@ -1,27 +1,57 @@
-<%= @project.title %><br>
-<%= @project.deadline %><br>
-<br>
-<strong>Tasks:</strong><br>
-<% @tasks.each do |task| %>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-offset-2">
+        <%= @project.title %><br>
+        <%= @project.deadline %><br>
+        <br>
+        <strong>Tasks:</strong><br>
+        <% @tasks.each do |task| %>
 
-  <%= task.title %><br>
-  <%= task.deadline %><br>
-  Required Skills:
-  <% task.skills.each do |skill| %>
-      <%=skill.name%>
-  <% end %>
-  <div class="">
-    Developer: <%=task.developer.name%>
+          <%= task.title %><br>
+          <%= task.deadline %><br>
+          Required Skills:
+          <% task.skills.each do |skill| %>
+              <%=skill.name%>
+          <% end %>
+          <div class="">
+            Developer: <%=task.developer.name%>
+          </div>
+
+          <br>
+        <% end %>
+        <%= button_to "Notify Developers", action: "new_email" %>
+
+        <br>
+        <h4>
+          <% if @time_left_in_hours > 0 %>
+          This project is due in <strong><%= @time_left_in_hours %> </strong>hours!!
+          <% else %>
+          Ooops! Your project is overdue!
+          <% end %>
+        <br>
+        <br>
+        Based on our industry-leading optimization model, you and your team will need <strong> <%= @max_time_in_days %> </strong> days and <strong> <%= @max_time_hours %> </strong> hours to finish this project.
+        <br>
+        <br>
+
+          <% if @time_left_in_hours > @total_time.max %>
+            Yay!! You'll be able to finish this project before the deadline.
+          <% else %>
+            Sorry you need to hire more people or reconsider your deadline.
+          <% end %>
+        </h4>
+      </div>
+    </div>
   </div>
-  <br>
-<% end %>
-
-<br>
-This is project is due in <%= @time_left_in_hours %> hours.
-<br>
-
-<% if @time_left_in_hours > @total_time.max %>
-  Yay!! You'll be able to finish this project before the deadline.
-<% else %>
-  Sorry you need to hire more people!
-<% end %>
+</div>

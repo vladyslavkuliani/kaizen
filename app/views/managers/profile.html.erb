@@ -1,24 +1,57 @@
-<!-- <div class="row">
-  <div class="col-md-2 col-sm-2 col-xs-4 full-height">
-    <%= render partial: '/partials/nav' %>
-  </div> -->
-
-
     <div id="wrapper">
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"> </li>
-                <li><strong><a href="#">Dashboard </a></strong></li>
-                <li><strong><a href="#">Staff </a></strong></li>
-                <li><strong><a href="#">Skills </a></strong></li>
+                <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+                <li><strong><%= link_to "Staff", devs_path %></strong></li>
+                <li><strong><%= link_to "Skills", skills_path %></strong></li>
             </ul>
         </div>
+    </div>
         <div class="page-content-wrapper">
-            <div class="container-fluid">
+            <div class="container-fluid dashboard-order">
                 <div class="row">
+                    <div class="col-md-4 col-md-offset-0">
+                      <img class="img-responsive profileDefault" src="http://i.imgur.com/ViV0AB0.png"></div>
+                    <div class="col-md-7 col-md-offset-1">
+                        <div class="panel-group" role="tablist" aria-multiselectable="true" id="accordion-1">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-1" aria-expanded="false" href="#accordion-1 .item-1"><%= link_to  "+ Create New Project", new_project_path%></a></h4></div>
+                                <div class="panel-collapse collapse item-1" role="tabpanel">
+                                    <div class="panel-body"><span>Item body.</span></div>
+                                </div>
+                            </div>
+                            <% @projects.each do |project| %>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab">
+                                    <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion-1" aria-expanded="false" href="#accordion-1 .item-2"><%= project.title %> - <%= project.deadline %></a></h4></div>
+                                <div class="panel-collapse collapse item-2" role="tabpanel">
+                                    <div class="panel-body"><span>More details on <%= link_to project.title, project_path(project.title) %>.<br><%= project.description %><br></span></div>
+                                </div>
+                            </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-0">
+                <p>Followers info here</p>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-0"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Panel Heading with list groups and pre scrolling here.</p>
+                </div>
+            </div>
+          </div>
+
+                <!-- <div class="row">
                   <div class="dashboard-view">
-                    <!-- <div class="col-md-10 col-sm-10 col-xs-8 "> -->
-                      <!-- <%= render partial: '/partials/userinfo' %> -->
+                    <div class="col-md-10 col-sm-10 col-xs-8 ">
+                      <%= render partial: '/partials/userinfo' %>
                     Projects:<br>
                     <% @projects.each do |project| %>
                       <p>
@@ -34,8 +67,4 @@
                       <br>
                       <%=button_to "Add New Project", new_project_path, method: :get, class: "btn btn-info"%>
                   </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+                </div> -->

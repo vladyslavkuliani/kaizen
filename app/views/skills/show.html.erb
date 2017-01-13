@@ -1,4 +1,22 @@
-<h1>This is show.html from skills controller</h1>
-<p><%= @skill.name %></p>
-<p><%= @skill.description %></p>
-<%= link_to("Edit", "/skills/#{@skill.name}/edit", class: 'btn btn-info') %> <%= link_to("Delete", "/skills/#{@skill.name}", :method => :delete, data: {confirm: "Are you sure you want to delete #{@skill.name}?"}, class: 'btn btn-danger') %>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-7 col-md-offset-1">
+        <h1>This is show.html from skills controller </h1>
+        <p><%= @skill.name %></p>
+        <p><%= @skill.description %></p>
+        <%= link_to("Edit", "/skills/#{@skill.name}/edit", class: 'btn btn-info') %> <%= link_to("Delete", "/skills/#{@skill.name}", :method => :delete, data: {confirm: "Are you sure you want to delete #{@skill.name}?"}, class: 'btn btn-danger') %>
+      </div>
+    </div>
+  </div>
+</div

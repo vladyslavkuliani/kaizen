@@ -25,6 +25,11 @@ module KaizenApp
     #   cronofy = Cronofy::Client.new(access_token: 'xoTQMfDkfJM19CBoBXIMFh4DKvUnDJlR')
     #   calendars = cronofy.list_calendars
     # end
+    config.active_record.raise_in_transactional_callbacks = true
+
+    config.middleware.use OmniAuth::Builder do
+      provider :github, '752d9f0a3344cc25b514', 'f2f6f139bc61587be3209b0b4705122149b2a5f3'
+    end
 
   end
 end

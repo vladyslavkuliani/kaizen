@@ -1,26 +1,44 @@
-<h1>Edit a developer's information</h1>
-<hr>
-<%=form_for :developer, url: "/team/#{@developer.name}", :method => :put do |f|%>
-  <%= f.hidden_field :manager_id, :value => @developer.manager_id %>
-  Name: <%=f.text_field :name%><br>
-  Email: <%=f.email_field :email%><br>
-  Salary: <%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><span>$</span>
-  <h3>Skill Set: </h3>
-  <div class="skills-scroll" data-spy="scroll">
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-offset-2">
+        <h1>Edit a developer's information</h1>
+        <%=form_for :developer, url: "/team/#{@developer.name}", :method => :put do |f|%>
+        <hr>
+          <%= f.hidden_field :manager_id, :value => @developer.manager_id %>
+          Name: <%=f.text_field :name%><br><br>
+          Email: <%=f.email_field :email%><br><br>
+          Salary: <span>$</span><%=f.number_field :salary, in: 1.0..500.0, step: 0.5%><br><br>
+          <h3>Skill Set: </h3>
+          <div class="skills-scroll" data-spy="scroll">
 
-    <%@skills.each_with_index do |skill, index|%>
+            <%@skills.each_with_index do |skill, index|%>
 
-      <%dev_skill = Developerskill.where({developer_id: @developer.id, skill_id: skill.id}).first%>
+              <%dev_skill = Developerskill.where({developer_id: @developer.id, skill_id: skill.id}).first%>
 
-      <% if dev_skill != nil %>
-        <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s, checked: true%>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: dev_skill.level)%><br>
-      <%else%>
-          <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s%>
-          Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br>
-      <%end%>
-    <%end%>
+              <% if dev_skill != nil %>
+                <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s, checked: true%>
+                  Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]], selected: dev_skill.level)%><br><br>
+              <%else%>
+                  <%=skill.name%>: <%= check_box_tag "skills[]", skill.id.to_s + "|" + index.to_s%>
+                  Level: <%=select_tag "level[]", options_for_select([[1, 1], [2, 2], [3, 3], [4, 4], [5, 5]])%><br><br>
+              <%end%>
+            <%end%>
 
+          </div>
+          <%=f.submit(class: 'btn btn-success')%>
+        <%end%>
+      </div>
+    </div>
   </div>
-  <%=f.submit(class: 'btn btn-success')%>
-<%end%>
+</div>

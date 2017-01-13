@@ -1,12 +1,23 @@
-<div class="row">
-
-  <div class="col-md-offset-2">
-
-    <%=button_to "Add New Skills", '/skills/new', method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
-
-    <% @skills.each do |skill| %>
-    <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p>
-    <p>Description: <%= skill.description%></p>
-    <% end %>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-offset-2">
+        <%=button_to "Add New Skills", '/skills/new', method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
+        <% @skills.each do |skill| %>
+        <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p><br><br>
+        <p>Description: <%= skill.description%></p><br><br>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

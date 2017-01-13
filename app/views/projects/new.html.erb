@@ -1,14 +1,33 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-offset-2">
+        <h1>Projects#new</h1>
+        <br>
+        <p>Find me in app/views/projects/new.html.erb</p>
+        <br>
+        <%= form_for :project, url: '/projects' do |f| %>
+        Title: <%= f.text_field :title %><br><br>
+        Deadline: <%= f.date_field :deadline %><br><br>
+        <span class="description">Description:</span> <%= f.text_area :description %><br><br>
+        <%= f.hidden_field :manager_id, :value => session[:manager_id] %><br>
+        <%= submit_tag "Submit", :name => "save" %>
+        <% end %>
 
-<%= form_for :project, url: '/projects' do |f| %>
-  Title: <%= f.text_field :title %><br>
-  Deadline: <%= f.date_field :deadline %><br>
-  <span class="description">Description:</span> <%= f.text_area :description %><br>
-  <%= f.hidden_field :manager_id, :value => session[:manager_id] %>
-  <%= submit_tag "Submit", :name => "save" %>
-<% end %>
-
-<% form_tag @new_event do%>
-  <%= submit_tag "Submit", :name => "save" %>
-<%end%>
+        <% form_tag @new_event do%>
+        <%= submit_tag "Submit", :name => "save" %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

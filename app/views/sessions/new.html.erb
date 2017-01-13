@@ -1,5 +1,6 @@
+<%=flash[:error] %>
 <div class="login-2">
-    <%= form_for @manager, url: '/login' do |f| %>
+    <%= form_for @manager, url: "/login" do |f| %>
         <div class="illustration">
           <img src="http://i.imgur.com/GxaU1bQ.png">
         </div>
@@ -10,10 +11,10 @@
             <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
         </div>
         <div class="form-group">
-            <%= f.submit("Log In", class: "btn btn-primary btn-block") %>
+            <%= f.submit("Log In",  class: "btn btn-primary btn-block")%>
         </div>
         <hr>
-        <center><a href="www.github.com"><i class="fa fa-github signup-github"></i></a></center>
+        <center><a href="auth/github"><i class="fa fa-github signup-github"></i></a></center>
         <p><center>Login with your GitHub account!</center></p>
     </form>
     <% end %>

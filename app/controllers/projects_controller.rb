@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  before_action :authorize, except: [:show]
+  before_action :authorize
 
   def index
     @projects = Project.where({manager_id: session[:manager_id]}).order(:updated_at).reverse_order
@@ -13,8 +13,9 @@ class ProjectsController < ApplicationController
   def create
     new_project = Project.new(project_params)
     if new_project.save
-      
+
       @cronofy = Cronofy::Client.new(access_token: 'xoTQMfDkfJM19CBoBXIMFh4DKvUnDJlR')
+
 
       @calendars = @cronofy.list_calendars
 
@@ -26,6 +27,7 @@ class ProjectsController < ApplicationController
       else
         p "you suck"
       end
+
       redirect_to '/profile'
     else
       flash[:error] = new_project.errors.full_messages.join("\n")

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  skip_before_filter :verify_authenticity_token, :only => :create_with_github
   before_action :authorize, only: [:show]
 
   def index
@@ -11,17 +11,31 @@ class SessionsController < ApplicationController
 
   def create
     manager = Manager.find_by_email(manager_params[:email])
+
     # If the user exists AND the password entered is correct.
-    if manager && manager.authenticate(manager_params[:password])
+    if manager.email != "email@example.com" && (manager && manager.authenticate(manager_params[:password]))
+
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to '/profile'
+      redirect_to :profile
     else
     # If user's login doesn't work, send them back to the login form.
       flash[:error] = "Wrong email or password!"
-      redirect_to '/login'
+      redirect_to '/signup'
     end
+  end
+
+  def create_with_github
+    manager = Manager.find_or_create_by(:provider => auth_hash[:provider], :uid => auth_hash[:uid]) do |user|
+       user.name =  auth_hash[:info].name
+       user.email = "email@example.com"
+       user.password_digest = "superpuperpassword"
+    end
+
+    session[:manager_id] = manager.id
+
+    redirect_to profile_path
   end
 
   def show
@@ -89,6 +103,17 @@ class SessionsController < ApplicationController
 
   end
 
+  def new_email
+    p "notify developer is clicked"
+    @project = Project.find_by_title(params[:title])
+    @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
+    @tasks.each do |task|
+      @developer = task.developer
+      DeveloperMailer.notice_email(@developer).deliver
+    end
+  end
+
+
   def destroy
     session[:manager_id] = nil
     redirect_to '/login'
@@ -136,10 +161,14 @@ class SessionsController < ApplicationController
 
     @max_time_in_days= (@total_time.max/5).floor
     @max_time_hours = (@total_time.max % 5).round(2)
-  
+
     @current_time = Time.now.getutc
     @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
 
+  end
+
+  def auth_hash
+    request.env["omniauth.auth"]
   end
 
 end
