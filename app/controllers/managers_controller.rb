@@ -18,9 +18,11 @@ class ManagersController < ApplicationController
     @projects = Project.where({manager_id: current_manager}).order(:updated_at).reverse_order
   end
 
+
 private
 
   def manager_params
     params.require(:manager).permit(:name, :last, :company, :email, :password, :password_confirmation)
   end
+
 end

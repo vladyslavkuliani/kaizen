@@ -6,5 +6,9 @@
   Deadline: <%= f.date_field :deadline %><br>
   <span class="description">Description:</span> <%= f.text_area :description %><br>
   <%= f.hidden_field :manager_id, :value => session[:manager_id] %>
-  <%= f.submit(class: 'btn btn-success') %>
+  <%= submit_tag "Submit", :name => "save" %>
 <% end %>
+
+<% form_tag @new_event do%>
+  <%= submit_tag "Submit", :name => "save" %>
+<%end%>

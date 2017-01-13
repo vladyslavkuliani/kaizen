@@ -40,6 +40,9 @@ gem "figaro"
 # Use httparty for external apis
 gem 'httparty'
 
+# Use cronofy for calender integration
+gem 'cronofy'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

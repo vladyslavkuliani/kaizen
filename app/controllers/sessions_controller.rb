@@ -121,7 +121,7 @@ class SessionsController < ApplicationController
       end
       @total_time<<@time
     end
-    @time = @time.round(2)
+
     @max_time_in_days= (@total_time.max/5).floor
     @max_time_hours = (@total_time.max % 5).round(2)
 

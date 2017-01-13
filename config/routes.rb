@@ -12,13 +12,16 @@ Rails.application.routes.draw do
   post '/managers' => 'managers#create'
   get '/managers/:name' => 'managers#show', as: 'manager'
   get '/profile' => 'managers#profile'
+  post '/profile' => 'managers#profile'
   get '/edit' => 'managers#edit'
   put '/profile' => 'managers#update'
   delete '/profile' => 'managers#destroy'
 
+
   # get '/projects' => 'projects#index', as: 'projects'
   get '/projects/new' => 'projects#new', as: 'new_project'
   post '/projects' => 'projects#create'
+  post 'projects/new' => 'projects#new'
   get '/projects/:title' => 'projects#show', as: 'project'
   get '/projects/:title/edit' => 'projects#edit', as: 'edit_project'
   put '/projects/:title' => 'projects#update'
