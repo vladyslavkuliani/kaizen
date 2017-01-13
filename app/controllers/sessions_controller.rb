@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
 
   def create
     manager = Manager.find_by_email(manager_params[:email])
-    p "--------------------------------------------------------"
-    p manager
+  
     # If the user exists AND the password entered is correct.
     if manager.email != "email@example.com" && (manager.authenticate(manager_params[:password]) && manager)
       # Save the user id inside the browser cookie. This is how we keep the user
