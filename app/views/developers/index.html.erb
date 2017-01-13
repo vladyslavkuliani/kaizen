@@ -1,33 +1,36 @@
-<!-- Developers#index
-
-<% @developers.each do |dev| %>
-  <p>
-    Name: <%= link_to dev.name, "/team/#{dev.name}" %><br>
-    Email: <%= dev.email %><br>
-    Salary: <%= dev.salary %><br>
-    <span class="skills">Skills:</span><br>
-    <span class="skills-list"><% dev.skills.each do |skill| %>
-      Name: <%= skill.name %><br>
-      
-      <% @dev_skill = Developerskill.where({developer_id: dev.id, skill_id: skill.id}) %>
-      Proficiency Level: <%= @dev_skill.first.level %><br>
-    <% end %>
-    </span>
-  </p>
-<% end %> -->
-
 <div id="wrapper">
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand"> </li>
-            <li><strong><a href="#">Dashboard </a></strong></li>
-            <li><strong><a href="#">Staff </a></strong></li>
-            <li><strong><a href="#">Skills </a></strong></li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
         </ul>
     </div>
-    <div class="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row"></div>
+</div>
+      <div class="page-content-wrapper">
+        <div class="container-fluid dashboard-order">
+          <div class="row">
+            <div class="col-md-7">
+              <h1>Developers#index</h1>
+              <hr>
+              <% @developers.each do |dev| %>
+                <p>
+                  Name: <%= link_to dev.name, "/team/#{dev.name}" %><br><br>
+                  Email: <%= dev.email %><br><br>
+                  Salary: <%= dev.salary %><br><br>
+                  <span class="skills">Skills:</span><br><br>
+                  <span class="skills-list"><% dev.skills.each do |skill| %>
+                    Name: <%= skill.name %><br><br>
+
+                    <% @dev_skill = Developerskill.where({developer_id: dev.id, skill_id: skill.id}) %>
+                    Proficiency Level: <%= @dev_skill.first.level %><br><br>
+                    <hr>
+                  <% end %>
+                  </span>
+                </p>
+              <% end %>
+          </div>
         </div>
     </div>
 </div>

@@ -3,7 +3,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand"> </li>
             <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
-            <li><strong><%= link_to "Staff", team_new_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
             <li><strong><%= link_to "Skills", skills_path %></strong></li>
         </ul>
     </div>
@@ -13,9 +13,9 @@
     <h1>This is edit.html from skills controller</h1>
     <%= form_for :skill, url: "/skills/#{@skill.name}", :method => :put do |f| %>
     <span>Name: </span>
-    <%= f.text_field :name %><br>
+    <%= f.text_field :name %><br><br>
     <span class="description">Description: </span>
-    <%= f.text_area :description %><br>
+    <%= f.text_area :description %><br><br>
     <%= f.submit(class: 'btn btn-success') %>
   <% end %>
   </div>

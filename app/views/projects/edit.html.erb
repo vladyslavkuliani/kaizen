@@ -1,10 +1,28 @@
-<h1>Projects#edit</h1>
-<p>Find me in app/views/projects/edit.html.erb</p>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand"> </li>
+            <li><strong><%= link_to "Dashboard", profile_path %></strong></li>
+            <li><strong><%= link_to "Staff", devs_path %></strong></li>
+            <li><strong><%= link_to "Skills", skills_path %></strong></li>
+        </ul>
+    </div>
+</div>
+<div class="page-content-wrapper">
+  <div class="container-fluid dashboard-order">
+    <div class="row">
+      <div class="col-md-7 col-md-offset-1">
+        <h1>Projects#edit</h1>
+        <p>Find me in app/views/projects/edit.html.erb</p>
 
-<%= form_for :project, url: "/projects/#{URI.encode(@project.title)}", :method => :put do |f| %>
-  Title: <%= f.text_field :title %><br>
-  Deadline: <%= f.date_field :deadline %><br>
-  <span class="description">Description:</span> <%= f.text_area :description %><br>
-  <%= f.hidden_field :manager_id, :value => session[:manager_id] %>
-  <%= f.submit(class: 'btn btn-success') %>
-<% end %>
+        <%= form_for :project, url: "/projects/#{URI.encode(@project.title)}", :method => :put do |f| %>
+          Title: <%= f.text_field :title %><br>
+          Deadline: <%= f.date_field :deadline %><br>
+          <span class="description">Description:</span> <%= f.text_area :description %><br>
+          <%= f.hidden_field :manager_id, :value => session[:manager_id] %>
+          <%= f.submit(class: 'btn btn-success') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
