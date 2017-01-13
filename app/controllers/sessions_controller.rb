@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  skip_before_filter :verify_authenticity_token, :only => :create
   def index
   end
 
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def create
     manager = Manager.find_by_email(params[:email])
     # If the user exists AND the password entered is correct.
-    if manager && manager.authenticate(params[:password])
+    if manager.email != "email@example.com" && (manager.authenticate(params[:password]) && manager)
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
@@ -19,6 +19,18 @@ class SessionsController < ApplicationController
       flash[:error] = "Wrong email or password!"
       redirect_to login_path
     end
+  end
+
+  def create_with_github
+    manager = Manager.find_or_create_by(:provider => auth_hash[:provider], :uid => auth_hash[:uid]) do |user|
+       user.name =  auth_hash[:info].name
+       user.email = "email@example.com"
+       user.password_digest = "superpuperpassword"
+    end
+
+    session[:manager_id] = manager.id
+
+    redirect_to profile_path
   end
 
   def show
@@ -133,6 +145,10 @@ class SessionsController < ApplicationController
     @current_time = Time.now.getutc
     @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
 
+  end
+
+  def auth_hash
+    request.env["omniauth.auth"]
   end
 
 end
