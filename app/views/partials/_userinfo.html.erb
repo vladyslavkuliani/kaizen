@@ -8,12 +8,11 @@
         <div class="clearfix text-center m-t">
           <div class="inline">
               <div class="thumb-xl avatar m-t-n-xxl">
-                <img src="" class="img-circle">
+                <img src="<%= @manager.image %>" class="img-circle">
               </div>
               <br>
             <div class="h4 m-t m-b-xs"><%= @manager.name %> <%= @manager.last %></div>
-            <br>
-            <small class="text-muted m-b">  <%=@manager.created_at.getlocal%></small>
+            <small class="text-muted m-b">  User Since: <%=@manager.created_at.to_date%></small>
             <br>
             <div class="h4 m-t m-b-xs"><%= @manager.company %></div>
             <br>

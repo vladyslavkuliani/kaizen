@@ -8,6 +8,7 @@
   Company: <%= f.text_field :company %>
   Password: <%= f.password_field :password %>
   Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
+  <%= f.hidden_field :image, :value => "http://i.imgur.com/en3Tpt6.png" %>
+  <%= f.submit "Submit", class: "btn btn-danger" %>
 
 <% end %>
