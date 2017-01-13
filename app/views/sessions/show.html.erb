@@ -14,14 +14,17 @@
     Developer: <%=task.developer.name%>
   </div>
 
-  <%= button_to "Notify Developer", action: "new_email" %>
-
   <br>
 <% end %>
+<%= button_to "Notify Developers", action: "new_email" %>
 
 <br>
 <h4>
-This project is due in <strong><%= @time_left_in_hours %> </strong>hours!!
+  <% if @time_left_in_hours > 0 %>
+  This project is due in <strong><%= @time_left_in_hours %> </strong>hours!!
+  <% else %>
+  Ooops! Your project is overdue!
+  <% end %>
 <br>
 <br>
 Based on our industry-leading optimization model, you and your team will need <strong> <%= @max_time_in_days %> </strong> days and <strong> <%= @max_time_hours %> </strong> hours to finish this project.
