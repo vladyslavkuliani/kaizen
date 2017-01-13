@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  before_action :authorize, except: [:show]
+  before_action :authorize
 
   def index
     @projects = Project.where({manager_id: session[:manager_id]}).order(:updated_at).reverse_order

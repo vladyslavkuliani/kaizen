@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
 
-  before_action :authorize, except: [:index, :show]
+  before_action :authorize
 
   def index
     @developers = Developer.all

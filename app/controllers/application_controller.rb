@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     if !current_manager
-      redirect_to "/sigup"
+      redirect_to "/signup"
     end
   end
 
