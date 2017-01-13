@@ -1,3 +1,4 @@
+<%=flash[:error] %>
 <div class="login-2">
     <%= form_for @manager, url: '/login' do |f| %>
         <div class="illustration">
@@ -13,7 +14,7 @@
             <%= f.submit("Log In", class: "btn btn-primary btn-block") %>
         </div>
         <hr>
-        <center><a href="www.github.com"><i class="fa fa-github signup-github"></i></a></center>
+        <center><a href="auth/github"><i class="fa fa-github signup-github"></i></a></center>
         <p><center>Login with your GitHub account!</center></p>
     </form>
     <% end %>
