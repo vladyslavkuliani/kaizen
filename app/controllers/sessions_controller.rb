@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create_with_github
   before_action :authorize, only: [:show]
+
   def index
   end
 
@@ -101,6 +102,14 @@ class SessionsController < ApplicationController
     total_time
 
   end
+
+  def new_email
+    p "notify developer is clicked"
+    @developer = current_manager.developers.last
+    DeveloperMailer.notice_email(@developer).deliver
+  end
+
+
 
   def destroy
     session[:manager_id] = nil

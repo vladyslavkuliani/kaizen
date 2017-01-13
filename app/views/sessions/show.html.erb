@@ -13,6 +13,9 @@
   <div class="">
     Developer: <%=task.developer.name%>
   </div>
+
+  <%= button_to "Notify Developer", action: "new_email" %>
+
   <br>
 <% end %>
 
