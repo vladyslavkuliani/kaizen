@@ -2,10 +2,10 @@
 
   <div class="col-md-offset-2">
 
-    <%=button_to "Add New Skills", new_skill_path, method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
+    <%=button_to "Add New Skills", '/skills/new', method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
 
     <% @skills.each do |skill| %>
-    <p>Skill: <%= link_to skill.name, skill_path(skill.name) %></p>
+    <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p>
     <p>Description: <%= skill.description%></p>
     <% end %>
   </div>

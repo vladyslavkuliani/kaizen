@@ -1,8 +1,4 @@
 <h1>This is show.html from skills controller</h1>
 <p><%= @skill.name %></p>
 <p><%= @skill.description %></p>
-<<<<<<< HEAD
-<%= link_to("Edit", edit_skill_path(@skill.name), class: 'btn btn-info') %> <%= link_to("Delete", @skill, :method => :delete, data: {confirm: 'Are you sure you want to delete this skill?'}, class: 'btn btn-danger') 
-=======
-<%= link_to("Edit", edit_skill_path(@skill.name), class: 'btn btn-info') %> <%= link_to("Delete", skill_path(@skill.name), :method => :delete, data: {confirm: "Are you sure you want to delete #{@skill.name}?"}, class: 'btn btn-danger') %>
->>>>>>> b667371a6d8ba6b7254ccac5d2d1a4d28ac0a1e8
+<%= link_to("Edit", "/skills/#{@skill.name}/edit", class: 'btn btn-info') %> <%= link_to("Delete", "/skills/#{@skill.name}", :method => :delete, data: {confirm: "Are you sure you want to delete #{@skill.name}?"}, class: 'btn btn-danger') %>

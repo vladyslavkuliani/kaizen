@@ -1,14 +1,35 @@
-<h1>Signup!</h1>
-
-<%= form_for :manager, url: '/managers' do |f| %>
-
-  Email: <%= f.text_field :email %>
-  First Name: <%= f.text_field :name %>
-  Last Name: <%= f.text_field :last %>
-  Company: <%= f.text_field :company %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.hidden_field :image, :value => "http://i.imgur.com/en3Tpt6.png" %>
-  <%= f.submit "Submit", class: "btn btn-danger" %>
-
-<% end %>
+<div class="register-photo">
+    <div class="form-container">
+        <div class="image-holder">
+          <img class="img-responsive signup-img" src="http://i.imgur.com/pvslEVd.png">
+        </div>
+        <%= form_for :manager, url: '/managers', class: 'form-control' do |f| %>
+            <h2 class="text-center"><strong>CREATE AN ACCOUNT</strong></h2>
+            <div class="form-group">
+              <%= f.text_field :name, placeholder: 'First Name', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :last, placeholder: 'Last Name', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :company, placeholder: 'Company', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :email, placeholder: 'Email', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= f.hidden_field :image, :value => "http://i.imgur.com/en3Tpt6.png" %>
+            </div>
+            <div class="form-group">
+                <%= f.submit("Sign Up", class: "btn btn-primary btn-block") %>
+            </div>
+            <%= link_to("You already have an account? Login here.", '/login', class: 'navbar-link login') %>
+        <% end %>
+    </div>
+</div>

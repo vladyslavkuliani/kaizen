@@ -1,23 +1,26 @@
 class SessionsController < ApplicationController
 
+  before_action :authorize, only: [:show]
+
   def index
   end
 
   def new
+    @manager = Manager.new
   end
 
   def create
-    manager = Manager.find_by_email(params[:email])
+    manager = Manager.find_by_email(manager_params[:email])
     # If the user exists AND the password entered is correct.
-    if manager && manager.authenticate(params[:password])
+    if manager && manager.authenticate(manager_params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to profile_path
+      redirect_to '/profile'
     else
     # If user's login doesn't work, send them back to the login form.
       flash[:error] = "Wrong email or password!"
-      redirect_to login_path
+      redirect_to '/login'
     end
   end
 
@@ -80,7 +83,7 @@ class SessionsController < ApplicationController
 
     end
 
-    @tasks = Task.where({project_id: @project.id})
+    @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
 
     total_time
 
@@ -88,10 +91,14 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:manager_id] = nil
-    redirect_to login_path
+    redirect_to '/login'
   end
 
   private
+
+  def manager_params
+    params.require(:manager).permit(:email, :password)
+  end
 
   def skills_level_per_task(task)
     arr = Array.new(current_manager.developers.count){|i| i=0}
@@ -129,7 +136,7 @@ class SessionsController < ApplicationController
 
     @max_time_in_days= (@total_time.max/5).floor
     @max_time_hours = (@total_time.max % 5).round(2)
-
+  
     @current_time = Time.now.getutc
     @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
 
