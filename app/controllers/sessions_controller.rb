@@ -105,10 +105,13 @@ class SessionsController < ApplicationController
 
   def new_email
     p "notify developer is clicked"
-    @developer = current_manager.developers.last
-    DeveloperMailer.notice_email(@developer).deliver
+    @project = Project.find_by_title(params[:title])
+    @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
+    @tasks.each do |task|
+      @developer = task.developer
+      DeveloperMailer.notice_email(@developer).deliver
+    end
   end
-
 
 
   def destroy
