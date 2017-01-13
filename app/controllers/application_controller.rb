@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize
-    redirect_to '/login' unless current_manager
+    if !current_manager
+      redirect_to "/signup"
+    end
   end
 
 end
