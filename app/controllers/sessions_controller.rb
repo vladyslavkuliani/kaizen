@@ -113,11 +113,16 @@ class SessionsController < ApplicationController
     @total_time = []
 
     @tasks.each do |task|
+
       @time = 0
       task.skills.each do |skill|
         current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
         current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
+        if current_dev[0] != nil
         @time += current_task[0].hours_needed * Math.sqrt(2.5) / Math.sqrt(current_dev[0].level)
+        else
+        @time += current_task[0].hours_needed * Math.sqrt(2.5)
+        end
       end
       @total_time<<@time
     end
@@ -127,7 +132,6 @@ class SessionsController < ApplicationController
 
     @current_time = Time.now.getutc
     @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
-
 
   end
 
