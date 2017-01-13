@@ -8,6 +8,7 @@ class ManagersController < ApplicationController
   def create
     manager = Manager.new(manager_params)
     if manager.save
+      ManagerMailer.welcome_email(manager).deliver
       session[:manager_id] = manager.id
       redirect_to '/profile'
     else
@@ -24,7 +25,7 @@ class ManagersController < ApplicationController
 private
 
   def manager_params
-    params.require(:manager).permit(:name, :last, :company, :email, :password, :password_confirmation)
+    params.require(:manager).permit(:name, :last, :company, :email, :password, :password_confirmation, :image)
   end
 
 end
