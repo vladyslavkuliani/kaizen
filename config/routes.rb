@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/signup' => 'managers#new'
   post '/managers' => 'managers#create'
   get '/managers/:name' => 'managers#show', as: 'manager'
-  get '/profile' => 'managers#profile'
+  get '/profile' => 'managers#profile', :as => 'profile'
   post '/profile' => 'managers#profile'
   get '/edit' => 'managers#edit'
   put '/profile' => 'managers#update'
@@ -48,4 +48,6 @@ Rails.application.routes.draw do
   put '/skills/:name' => 'skills#update'
   delete '/skills/:name' => 'skills#destroy'
 
+  get 'auth/github', :as => 'github_auth'
+  match 'auth/:provider/callback' => "sessions#create_with_github", :via => [:get, :post]
 end

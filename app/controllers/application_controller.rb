@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_manager
 
   def authorize
-    redirect_to '/login' unless current_manager
+    if !current_manager
+      redirect_to "/sigup"
+    end
   end
 
 end

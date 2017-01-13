@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20170110222116) do
     t.string   "company"
     t.string   "password_digest"
     t.string   "image"
+    t.string   "provider"
+    t.string   "uid"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
