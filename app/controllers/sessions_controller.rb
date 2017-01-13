@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create_with_github
-  before_action :authorize, only: [:show]
+
 
   def index
   end
