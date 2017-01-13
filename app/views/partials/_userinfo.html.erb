@@ -22,19 +22,13 @@
       </div>
       <footer class="panel-footer bg-info text-center no-padder">
         <div class="row no-gutter">
-          <div class="col-xs-4">
+          <div class="col-xs-6" id="box-border  ">
             <div class="wrapper">
-              <span class="m-b-xs h3 block text-white">245</span>
-              <small class="text-muted">Followers</small>
+              <span class="m-b-xs h3 block text-white"><%= @manager.developers.count %></span>
+              <small class="text-muted">Developers</small>
             </div>
           </div>
-          <div class="col-xs-4 dk">
-            <div class="wrapper">
-              <span class="m-b-xs h3 block text-white">55</span>
-              <small class="text-muted">Following</small>
-            </div>
-          </div>
-          <div class="col-xs-4">
+          <div class="col-xs-6">
             <div class="wrapper">
               <span class="m-b-xs h3 block text-white"><%= @manager.projects.count %></span>
               <small class="text-muted">Projects</small>

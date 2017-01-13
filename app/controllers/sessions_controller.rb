@@ -1,28 +1,35 @@
 class SessionsController < ApplicationController
 
+  before_action :authorize, only: [:show]
+
   def index
   end
 
   def new
+    @manager = Manager.new
   end
 
   def create
-    manager = Manager.find_by_email(params[:email])
+    manager = Manager.find_by_email(manager_params[:email])
     # If the user exists AND the password entered is correct.
-    if manager && manager.authenticate(params[:password])
+    if manager && manager.authenticate(manager_params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user
       # logged in when they navigate around our website.
       session[:manager_id] = manager.id
-      redirect_to profile_path
+      redirect_to '/profile'
     else
     # If user's login doesn't work, send them back to the login form.
       flash[:error] = "Wrong email or password!"
-      redirect_to login_path
+      redirect_to '/login'
     end
   end
 
   def show
     @project = Project.find_by_title(params[:title])
+
+    @project.tasks.each do |t|
+      t.update({taken:false})
+    end
 
     sum_skills_level_per_task = Array.new(current_manager.developers.count){|i| i= {index: i, value: 0, zero_count: 0}}
 
@@ -62,7 +69,7 @@ class SessionsController < ApplicationController
       dev_id = dev_ids[obj[:index]]
 
       developers_levels.each_with_index do |task_levels, index|
-        if task_levels[obj[:index]] >= max && !Task.find(tasks_ids[index]).taken
+        if task_levels[obj[:index]] >= max && !Task.find(tasks_ids[index])[:taken]
           max =  task_levels[obj[:index]]
           task_id = tasks_ids[index]
         end
@@ -76,15 +83,22 @@ class SessionsController < ApplicationController
 
     end
 
-    @tasks = Task.where({project_id: @project.id})
+    @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
+
+    total_time
+
   end
 
   def destroy
     session[:manager_id] = nil
-    redirect_to login_path
+    redirect_to '/login'
   end
 
   private
+
+  def manager_params
+    params.require(:manager).permit(:email, :password)
+  end
 
   def skills_level_per_task(task)
     arr = Array.new(current_manager.developers.count){|i| i=0}
@@ -99,6 +113,33 @@ class SessionsController < ApplicationController
       end
     end
     arr
+  end
+
+
+  def total_time
+    @total_time = []
+
+    @tasks.each do |task|
+
+      @time = 0
+      task.skills.each do |skill|
+        current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
+        current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
+        if current_dev[0] != nil
+        @time += current_task[0].hours_needed * Math.sqrt(2.5) / Math.sqrt(current_dev[0].level)
+        else
+        @time += current_task[0].hours_needed * Math.sqrt(2.5)
+        end
+      end
+      @total_time<<@time
+    end
+
+    @max_time_in_days= (@total_time.max/5).floor
+    @max_time_hours = (@total_time.max % 5).round(2)
+  
+    @current_time = Time.now.getutc
+    @time_left_in_hours = (@project.deadline.to_time.to_i - @current_time.to_time.to_i)/3600
+
   end
 
 end

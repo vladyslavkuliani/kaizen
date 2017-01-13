@@ -3,18 +3,25 @@
 <br>
 <strong>Tasks:</strong><br>
 <% @tasks.each do |task| %>
+
   <%= task.title %><br>
   <%= task.deadline %><br>
-  Required Skills:<br>
+  Required Skills:
   <% task.skills.each do |skill| %>
-      <% if Developerskill.where({skill_id: skill.id}) != nil %>
-        <% Developerskill.where({skill_id: skill.id}).each do |devskill| %>
-        <% if task.developer %>
-        <%= task.developer.name %>,
-        <% end %>
-        <%= skill.name %>, <%= devskill.level %><br>
-        <% end %>
-      <% end %>
+      <%=skill.name%>
   <% end %>
+  <div class="">
+    Developer: <%=task.developer.name%>
+  </div>
   <br>
+<% end %>
+
+<br>
+This is project is due in <%= @time_left_in_hours %> hours.
+<br>
+
+<% if @time_left_in_hours > @total_time.max %>
+  Yay!! You'll be able to finish this project before the deadline.
+<% else %>
+  Sorry you need to hire more people!
 <% end %>

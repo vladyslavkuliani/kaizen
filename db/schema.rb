@@ -17,14 +17,18 @@ ActiveRecord::Schema.define(version: 20170110222116) do
 
   create_table "developers", force: :cascade do |t|
     t.string   "name"
-    t.string   "salary"
+    t.string   "email"
+    t.float    "salary"
+    t.integer  "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["manager_id"], name: "index_developers_on_manager_id", using: :btree
   end
 
   create_table "developerskills", force: :cascade do |t|
     t.integer  "developer_id"
     t.integer  "skill_id"
+    t.integer  "level"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["developer_id"], name: "index_developerskills_on_developer_id", using: :btree
@@ -44,7 +48,7 @@ ActiveRecord::Schema.define(version: 20170110222116) do
   create_table "projects", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
-    t.datetime "deadline"
+    t.date     "deadline"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "manager_id"
@@ -53,29 +57,33 @@ ActiveRecord::Schema.define(version: 20170110222116) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.string   "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "developer_id"
     t.string   "title"
     t.string   "description"
     t.string   "cost"
     t.string   "status"
     t.integer  "priority_level"
+    t.boolean  "taken"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "project_id"
     t.date     "deadline"
+    t.index ["developer_id"], name: "index_tasks_on_developer_id", using: :btree
     t.index ["project_id"], name: "index_tasks_on_project_id", using: :btree
   end
 
   create_table "taskskills", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "task_id"
     t.integer  "skill_id"
+    t.integer  "hours_needed"
     t.index ["skill_id"], name: "index_taskskills_on_skill_id", using: :btree
     t.index ["task_id"], name: "index_taskskills_on_task_id", using: :btree
   end
