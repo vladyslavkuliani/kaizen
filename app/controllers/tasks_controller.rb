@@ -35,7 +35,7 @@ class TasksController < ApplicationController
       updated_task.skills.clear
       params[:skills].each do |skill|
         updated_task.skills << Skill.find(skill)
-        
+        p params[:time]
         updated_skill = Taskskill.where({task_id: updated_task.id.to_i, skill_id: skill})
         updated_skill.update_all(hours_needed: params[:time][skill.to_i])
         p updated_skill.first
