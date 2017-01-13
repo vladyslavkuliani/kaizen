@@ -1,24 +1,42 @@
-# README
+# Kaizen
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+Given a project, its required tasks, the available developers, and the skills associated with both the tasks and the developers, this app generates a workflow and estimates the approximate time required to complete said project.
 
-* Ruby version
+## Heroku Link
 
-* System dependencies
+[Kaizen](https://desolate-spire-13116.herokuapp.com/)
 
-* Configuration
+## Technologies Used
 
-* Database creation
+* Ruby
+* Rails
+* Bootstrap
+* Sass
+* JQuery
+* JavaScript
+* ActionMailer
+* BCrypt
+* Omniauth-github
+* Cronofy
+* FFaker
+* HTTParty
 
-* Database initialization
+## Wish List / Future Development
 
-* How to run the test suite
+* Additional tweaking to the alogrithm
+* In-app messaging
+* Notifications
+* Oauth to calendar
+* Calculate whether an already-determined team will meet the deadline
+* Allow developers to use this app to track task completion
+* Enhanced user experience
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## Contributors
+* [Vladyslav Kuliani](https://github.com/vladyslavkuliani)
+* [Sophie Luo](https://github.com/sophieluo)
+* [Martin Uriarte](https://github.com/TheMartinUriarte)
+* [Margaret Ha](https://github.com/margarh1)
 
-* ...
