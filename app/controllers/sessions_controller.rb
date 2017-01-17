@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
   def create_with_github
     manager = Manager.find_or_create_by(:provider => auth_hash[:provider], :uid => auth_hash[:uid]) do |user|
        user.name =  auth_hash[:info].name
+       user.last = ""
        user.email = "email@example.com"
        user.password_digest = "superpuperpassword"
     end

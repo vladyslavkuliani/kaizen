@@ -3,23 +3,31 @@ class TasksController < ApplicationController
   before_action :authorize
 
   def create
-    @project = Project.find(task_params[:project_id])
-    new_task = @project.tasks.create(task_params)
-
-    params[:skills].each do |skill_id_index|
-      id = skill_id_index.split("|")[0].to_i
-      index = skill_id_index.split("|")[1].to_i
-
-      new_task.skills << Skill.find(id)
-
-      task_skill = Taskskill.where({task_id: new_task.id, skill_id: id})
-      task_skill.update_all(hours_needed: params[:time][index])
-
-    end
-    if new_task
-      redirect_to "/projects/#{@project.title}"
+    if params[:skills] == nil
+      redirect_to :profile
     else
-      flash[:error] = new_task.errors.full_messages.join("\n")
+      @project = Project.find(task_params[:project_id])
+      new_task = @project.tasks.create(task_params)
+
+      params[:skills].each do |skill_id_index|
+        id = skill_id_index.split("|")[0].to_i
+        index = skill_id_index.split("|")[1].to_i
+
+        new_task.skills << Skill.find(id)
+
+        task_skill = Taskskill.where({task_id: new_task.id, skill_id: id})
+        if params[:time][index]==""
+          task_skill.update_all(hours_needed: "5")
+        else
+          task_skill.update_all(hours_needed: params[:time][index])
+        end
+      end
+      
+      if new_task
+        redirect_to "/projects/#{@project.title}"
+      else
+        flash[:error] = new_task.errors.full_messages.join("\n")
+      end
     end
   end
 
@@ -36,7 +44,7 @@ class TasksController < ApplicationController
       params[:time].each do |time|
         if time != ""
           skill = params[:skills].shift
-          
+
           updated_task.skills << Skill.find(skill)
           updated_skill = Taskskill.where({task_id: updated_task.id.to_i, skill_id: skill})
           updated_skill.update_all(hours_needed: time)
