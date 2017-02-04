@@ -15,42 +15,52 @@
         <%= @project.title %><br>
         <%= @project.deadline %><br>
         <br>
-        <strong>Tasks:</strong><br>
-        <% @tasks.each do |task| %>
+        <%if @tasks.size > 0%>
+          <%if !@not_enough_developers%>
+            <strong>Tasks:</strong><br>
+            <% @tasks.each do |task| %>
 
-          <%= task.title %><br>
-          <%= task.deadline %><br>
-          Required Skills:
-          <% task.skills.each do |skill| %>
-              <%=skill.name%>
-          <% end %>
-          <div class="">
-            Developer: <%=task.developer.name%>
-          </div>
+              <%= task.title %><br>
+              <%= task.deadline %><br>
+              Required Skills:
+              <% task.skills.each do |skill| %>
+                  <%=skill.name%>
+              <% end %>
+              <div class="">
+                Developer: <%=task.developer.name%>
+              </div>
 
-          <br>
-        <% end %>
-        <%= button_to "Notify Developers", action: "new_email" %>
+              <br>
+            <% end %>
+            <%= button_to "Notify Developers", action: "new_email" %>
 
-        <br>
-        <h4>
-          <% if @time_left_in_hours > 0 %>
-          This project is due in <strong><%= @time_left_in_hours %> </strong>hours!!
-          <% else %>
-          Ooops! Your project is overdue!
-          <% end %>
-        <br>
-        <br>
-        Based on our industry-leading optimization model, you and your team will need <strong> <%= @max_time_in_days %> </strong> days and <strong> <%= @max_time_hours %> </strong> hours to finish this project.
-        <br>
-        <br>
+            <br>
+            <h4>
+              <% if @time_left_in_hours > 0 %>
+              This project is due in <strong><%= @time_left_in_hours %> </strong>hours!!
+              <% else %>
+              Ooops! Your project is overdue!
+              <% end %>
+            <br>
+            <br>
+            Based on our industry-leading optimization model, you and your team will need <strong> <%= @max_time_in_days %> </strong> days and <strong> <%= @max_time_hours %> </strong> hours to finish this project.
+            <br>
+            <br>
 
-          <% if @time_left_in_hours > @total_time.max %>
-            Yay!! You'll be able to finish this project before the deadline.
-          <% else %>
-            Sorry you need to hire more people or reconsider your deadline.
-          <% end %>
-        </h4>
+              <% if @time_left_in_hours > @total_time.max %>
+                Yay!! You'll be able to finish this project before the deadline.
+              <% else %>
+                Sorry you need to hire more people or reconsider your deadline.
+              <% end %>
+            </h4>
+          <%else%>
+              <h3>Unfortunately in the current version of an app the number of developers shouldn't be less than number of tasks in this project!</h3>
+              <h3>This feature is in progress. It'll be available with new update.</h3>
+              <h3>Thank you for undestanding!</h3>
+          <%end%>
+        <%else%>
+          <h3>You probably want to add task to your projects before calculating the workflow!</h3>
+        <%end%>
       </div>
     </div>
   </div>

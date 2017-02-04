@@ -11,11 +11,14 @@
 <div class="page-content-wrapper">
   <div class="container-fluid dashboard-order">
     <div class="row">
-      <div class="col-md-offset-2">
+      <div class="col-md-offset-1">
         <%=button_to "Add New Skills", '/skills/new', method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
+        <br>
         <% @skills.each do |skill| %>
-        <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p><br><br>
-        <p>Description: <%= skill.description%></p><br><br>
+        <div style="float:left; margin: 10px 10px; border: 1px solid black">
+          <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p><br><br>
+          <p>Description: <%= skill.description%></p><br><br>
+        </div>
         <% end %>
       </div>
     </div>

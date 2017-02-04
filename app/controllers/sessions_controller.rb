@@ -100,8 +100,13 @@ class SessionsController < ApplicationController
 
     @tasks = Task.where({project_id: @project.id}).order(:updated_at).reverse_order
 
-    total_time
 
+    if current_manager.developers.size >= @tasks.size
+      total_time
+      @not_enough_developers = false
+    else
+      @not_enough_developers = true
+    end
   end
 
   def new_email
@@ -151,14 +156,18 @@ class SessionsController < ApplicationController
       task.skills.each do |skill|
         current_task = Taskskill.where({task_id: task.id, skill_id: skill.id})
         current_dev = Developerskill.where({developer_id: task.developer.id, skill_id: skill.id})
+
         if current_dev[0] != nil
-        @time += current_task[0].hours_needed * Math.sqrt(2.5) / Math.sqrt(current_dev[0].level)
+          @time += current_task[0].hours_needed * Math.sqrt(2.5) / Math.sqrt(current_dev[0].level)
         else
-        @time += current_task[0].hours_needed * Math.sqrt(2.5)
+          @time += current_task[0].hours_needed * Math.sqrt(2.5)
         end
       end
       @total_time<<@time
     end
+
+
+    @total_time = [0] if @total_time.size == 0
 
     @max_time_in_days= (@total_time.max/5).floor
     @max_time_hours = (@total_time.max % 5).round(2)
