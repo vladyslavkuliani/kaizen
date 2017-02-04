@@ -15,7 +15,7 @@
         <%=button_to "Add New Skills", '/skills/new', method: :get, class: "btn btn-info btn-sm", form: {style: 'display:inline-block;'}%>
         <br>
         <% @skills.each do |skill| %>
-        <div style="float:left; margin: 10px 10px; border: 1px solid black">
+        <div style="float:left; margin: 10px 10px; border: 1px solid grey">
           <p>Skill: <%= link_to skill.name, "/skills/#{skill.name}" %></p><br><br>
           <p>Description: <%= skill.description%></p><br><br>
         </div>
