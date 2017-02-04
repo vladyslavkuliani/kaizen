@@ -51,5 +51,5 @@ Rails.application.routes.draw do
   delete '/skills/:name' => 'skills#destroy'
 
   get 'auth/github', :as => 'github_auth'
-  match 'auth/:provider/callback' => "sessions#create_with_github", :via => [:get, :post]
+  match 'auth/:provider/callback' => "sessions#create_with_github", :via => [:get, :head, :post, :put, :delete, :options]
 end
