@@ -25,9 +25,8 @@
 
 .skills-scroll {
   position: relative;
-  height: 100px;
+  height: 200px;
   overflow: auto;
-  width: 200px;
 }
 
 .full-height{

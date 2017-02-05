@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
   belongs_to :manager
-  has_many :tasks, dependent: :destroy
+  has_many :tasks, dependent: :delete_all
 
   validates :title, presence: true
   validate :deadline_cannot_be_earlier_than_today

@@ -17,7 +17,7 @@
         <p>
           <strong>Project Deadline:</strong> <%= @project.deadline %><br>
           <strong>Project Description:</strong> <%= @project.description %><br>
-          <strong>Project Tasks:</strong> <span class="task">Add Task</span>
+          <strong>Project Tasks:</strong> <span class="btn btn-success task">Add Task</span>
           <div class="new-task">
             <%= form_for :task, url: '/tasks' do |f| %>
               <%= f.hidden_field :project_id, :value => @project.id %>
@@ -29,7 +29,7 @@
               Skills required:<br>
               <div class="skills-scroll" data-spy="scroll">
                 <%Skill.all.order(:name).each_with_index do |skill,indx|%>
-                  <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%> <%=skill.name%>:<br>
+                  <%= check_box_tag "skills[]", skill.id.to_s + "|" + indx.to_s%> <%=skill.name%>:
                   Expected time to complete (in hours): <%=number_field_tag "time[]" %><br>
                 <%end%>
               </div>
